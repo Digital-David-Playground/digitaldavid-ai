@@ -39,7 +39,7 @@ export default function ImpressumPage() {
               Kontakt
             </h2>
             <p className="text-gray-400 mb-6">
-              E-Mail: hello@digitaldavid.ai
+              E-Mail: hello@digitaldavid.io
             </p>
 
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">

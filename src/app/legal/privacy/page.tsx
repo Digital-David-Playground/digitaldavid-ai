@@ -28,7 +28,7 @@ export default function PrivacyPage() {
               Digital David AG (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed to protecting
               your privacy. This Privacy Policy explains how we collect, use,
               disclose, and safeguard your information when you visit our
-              website digitaldavid.ai.
+              website digitaldavid.io.
             </p>
 
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
               <br />
               Germany
               <br />
-              Email: hello@digitaldavid.ai
+              Email: hello@digitaldavid.io
             </p>
 
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">
@@ -123,10 +123,10 @@ export default function PrivacyPage() {
               <br />
               Email:{" "}
               <a
-                href="mailto:hello@digitaldavid.ai"
+                href="mailto:hello@digitaldavid.io"
                 className="text-electric-blue hover:underline"
               >
-                hello@digitaldavid.ai
+                hello@digitaldavid.io
               </a>
             </p>
           </div>

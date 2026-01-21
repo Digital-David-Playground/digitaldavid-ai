@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -34,7 +35,14 @@ export function Header() {
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-3 group">
+          <Image
+            src="/logo.png"
+            alt="Digital David Logo"
+            width={40}
+            height={40}
+            className="w-10 h-10"
+          />
           <span className="text-2xl font-bold">
             <span className="text-white">Digital</span>
             <span className="gradient-text">David</span>

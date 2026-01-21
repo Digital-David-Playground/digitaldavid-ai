@@ -43,8 +43,8 @@ export async function POST(request: Request) {
 
     // Send notification email to team
     const { error: teamEmailError } = await resend.emails.send({
-      from: "Digital David <noreply@digitaldavid.ai>",
-      to: ["hello@digitaldavid.ai"],
+      from: "Digital David <noreply@digitaldavid.io>",
+      to: ["hello@digitaldavid.io"],
       replyTo: data.email,
       subject: `New ${inquiryLabel} from ${data.name}`,
       html: `
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
           </div>
 
           <p style="text-align: center; color: #94a3b8; font-size: 12px; margin-top: 20px;">
-            Sent from digitaldavid.ai contact form
+            Sent from digitaldavid.io contact form
           </p>
         </body>
         </html>
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
 
     // Send confirmation email to the user
     const { error: userEmailError } = await resend.emails.send({
-      from: "Digital David <noreply@digitaldavid.ai>",
+      from: "Digital David <noreply@digitaldavid.io>",
       to: [data.email],
       subject: "We received your message - Digital David",
       html: `
@@ -148,9 +148,9 @@ export async function POST(request: Request) {
           </div>
 
           <div style="text-align: center; margin-top: 24px;">
-            <a href="https://digitaldavid.ai" style="color: #0ea5e9; text-decoration: none; font-size: 14px;">digitaldavid.ai</a>
+            <a href="https://digitaldavid.io" style="color: #0ea5e9; text-decoration: none; font-size: 14px;">digitaldavid.io</a>
             <span style="color: #cbd5e1; margin: 0 8px;">|</span>
-            <a href="mailto:hello@digitaldavid.ai" style="color: #0ea5e9; text-decoration: none; font-size: 14px;">hello@digitaldavid.ai</a>
+            <a href="mailto:hello@digitaldavid.io" style="color: #0ea5e9; text-decoration: none; font-size: 14px;">hello@digitaldavid.io</a>
           </div>
 
           <p style="text-align: center; color: #94a3b8; font-size: 11px; margin-top: 16px;">

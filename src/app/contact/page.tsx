@@ -180,10 +180,10 @@ export default function ContactPage() {
                     <div>
                       <CardTitle className="mb-1 text-lg">Email</CardTitle>
                       <a
-                        href="mailto:hello@digitaldavid.ai"
+                        href="mailto:hello@digitaldavid.io"
                         className="text-gray-400 hover:text-electric-blue transition-colors"
                       >
-                        hello@digitaldavid.ai
+                        hello@digitaldavid.io
                       </a>
                     </div>
                   </div>
@@ -258,7 +258,7 @@ export default function ContactPage() {
                 We&apos;ll explore how we can help transform your operations.
               </CardDescription>
               <Button
-                href="mailto:hello@digitaldavid.ai?subject=Discovery Call Request"
+                href="mailto:hello@digitaldavid.io?subject=Discovery Call Request"
                 variant="primary"
                 className="w-full"
               >

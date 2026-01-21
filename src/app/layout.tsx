@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Digital David | AI Engineering for the Agentic Era",
     description: "We don't just build AI. We engineer the future.",
-    url: "https://digitaldavid.ai",
+    url: "https://digitaldavid.io",
     siteName: "Digital David",
     locale: "en_US",
     type: "website",
