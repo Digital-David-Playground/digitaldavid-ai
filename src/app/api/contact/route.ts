@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only if API key is available
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 interface ContactFormData {
   name: string;
@@ -40,6 +43,15 @@ export async function POST(request: Request) {
     }
 
     const inquiryLabel = inquiryTypeLabels[data.inquiryType] || data.inquiryType;
+
+    // Check if Resend is configured
+    if (!resend) {
+      console.error("Resend API key not configured");
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
 
     // Send notification email to team
     const { error: teamEmailError } = await resend.emails.send({
