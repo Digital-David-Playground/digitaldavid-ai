@@ -26,6 +26,19 @@ import {
   Lock,
   MessageCircle,
   Building2,
+  LayoutDashboard,
+  Search,
+  BookOpen,
+  Lightbulb,
+  ListChecks,
+  FileText,
+  StickyNote,
+  Link2,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Database,
+  GitBranch,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -141,6 +154,133 @@ const capabilities = [
     icon: Users,
     title: "Collaboration Tools",
     description: "Interdisciplinary team coordination with real-time updates.",
+  },
+];
+
+// AI Research Platform Modules
+const aiResearchModules = [
+  {
+    icon: LayoutDashboard,
+    name: "Dashboard",
+    tagline: "Central Command Center",
+    description: "Real-time overview of all research activities, KPIs, and project status. Your single source of truth for pharmaceutical R&D.",
+    features: [
+      "Real-time KPIs and metrics",
+      "Project status overview",
+      "Team activity feed",
+      "Alert and notification center",
+    ],
+  },
+  {
+    icon: Search,
+    name: "Discovery Hub",
+    tagline: "Intelligent Literature Exploration",
+    description: "AI-powered literature search across PubMed, clinical trials, and proprietary databases with semantic understanding.",
+    features: [
+      "Semantic search across multiple databases",
+      "Automatic relevance scoring",
+      "Citation network analysis",
+      "Saved searches with alerts",
+    ],
+  },
+  {
+    icon: BookOpen,
+    name: "Evidence Synthesis",
+    tagline: "PRISMA-Compliant Systematic Reviews",
+    description: "Automated systematic review workflows following PRISMA guidelines with AI-assisted screening and data extraction.",
+    features: [
+      "PRISMA-compliant workflow",
+      "AI-assisted abstract screening",
+      "Automated data extraction",
+      "Risk of bias assessment",
+    ],
+  },
+  {
+    icon: Lightbulb,
+    name: "Hypotheses",
+    tagline: "AI-Powered Hypothesis Generation",
+    description: "Generate and evaluate research hypotheses based on evidence synthesis and knowledge graph connections.",
+    features: [
+      "AI-generated hypothesis suggestions",
+      "Evidence strength scoring",
+      "Knowledge graph visualization",
+      "Hypothesis versioning and tracking",
+    ],
+  },
+  {
+    icon: ListChecks,
+    name: "Prioritization",
+    tagline: "Multi-Criteria Decision Analysis",
+    description: "Systematic prioritization of research directions using configurable criteria and stakeholder input.",
+    features: [
+      "Weighted scoring models",
+      "Stakeholder voting system",
+      "Scenario analysis",
+      "Decision audit trails",
+    ],
+  },
+  {
+    icon: FileText,
+    name: "Study Proposals",
+    tagline: "Protocol Generation",
+    description: "AI-assisted study protocol generation with templates, regulatory alignment, and feasibility assessment.",
+    features: [
+      "Protocol template library",
+      "Regulatory requirement checker",
+      "Feasibility assessment tools",
+      "Budget estimation",
+    ],
+  },
+  {
+    icon: StickyNote,
+    name: "Research Notes",
+    tagline: "Collaborative Knowledge Management",
+    description: "Structured note-taking with AI tagging, cross-referencing, and knowledge base integration.",
+    features: [
+      "AI-powered tagging",
+      "Cross-reference suggestions",
+      "Team collaboration features",
+      "Version history and comments",
+    ],
+  },
+  {
+    icon: Link2,
+    name: "CTD Bridge",
+    tagline: "Regulatory Submission Preparation",
+    description: "Seamless connection to CTD-AI Suite for preparing regulatory submissions from research findings.",
+    features: [
+      "Evidence package export",
+      "CTD module mapping",
+      "Gap analysis for submissions",
+      "Audit-ready documentation",
+    ],
+  },
+];
+
+const aiResearchBenefits = [
+  {
+    icon: TrendingUp,
+    value: "10x",
+    label: "Faster Literature Analysis",
+    description: "Reduce weeks of manual review to hours",
+  },
+  {
+    icon: Lightbulb,
+    value: "100+",
+    label: "Hypothesis Suggestions",
+    description: "AI-generated research directions per project",
+  },
+  {
+    icon: Target,
+    value: "85%",
+    label: "Screening Accuracy",
+    description: "AI-assisted relevance classification",
+  },
+  {
+    icon: Database,
+    value: "50M+",
+    label: "Indexed Publications",
+    description: "Comprehensive literature coverage",
   },
 ];
 
@@ -336,6 +476,145 @@ export default function FactifyPharmaPage() {
             );
           })}
         </StaggerChildren>
+      </Section>
+
+      {/* AI Research Platform */}
+      <Section id="ai-research">
+        <FadeInUp>
+          <div className="text-center mb-12">
+            <Badge variant="info" className="mb-4">New Module</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              AI Research <span className="gradient-text">Platform</span>
+            </h2>
+            <p className="text-gray-400 max-w-3xl mx-auto mb-4">
+              An integrated AI platform revolutionizing pharmaceutical R&D. From literature discovery
+              to regulatory submission preparation - eight powerful modules working in harmony.
+            </p>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm">
+              Systematically generate and prioritize research hypotheses, accelerate evidence synthesis,
+              and seamlessly bridge research findings to regulatory submissions.
+            </p>
+          </div>
+        </FadeInUp>
+
+        {/* Benefits Stats */}
+        <StaggerChildren className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {aiResearchBenefits.map((benefit) => {
+            const IconComponent = benefit.icon;
+            return (
+              <StaggerItem key={benefit.label}>
+                <Card variant="glass" className="p-5 text-center h-full">
+                  <div className="w-10 h-10 rounded-lg bg-purple/10 flex items-center justify-center mx-auto mb-3">
+                    <IconComponent className="text-purple" size={20} />
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold gradient-text mb-1">
+                    {benefit.value}
+                  </div>
+                  <div className="text-white font-medium text-sm mb-1">{benefit.label}</div>
+                  <div className="text-gray-500 text-xs">{benefit.description}</div>
+                </Card>
+              </StaggerItem>
+            );
+          })}
+        </StaggerChildren>
+
+        {/* Platform Architecture Visual */}
+        <FadeInUp delay={0.2}>
+          <div className="mb-16">
+            <div className="relative bg-gradient-to-br from-slate/50 to-midnight/50 rounded-2xl border border-slate-light/20 p-8 overflow-hidden">
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-purple/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-electric-blue/5 rounded-full blur-3xl" />
+
+              <div className="relative">
+                <div className="text-center mb-8">
+                  <h3 className="text-xl font-bold text-white mb-2">Integrated Research Workflow</h3>
+                  <p className="text-gray-400 text-sm">Eight modules connected through a unified knowledge layer</p>
+                </div>
+
+                {/* Module Flow */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {aiResearchModules.map((module, index) => {
+                    const IconComponent = module.icon;
+                    return (
+                      <div key={module.name} className="relative">
+                        <div className="bg-slate/50 border border-slate-light/20 rounded-xl p-4 hover:border-purple/40 transition-colors group">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple/20 to-electric-blue/20 flex items-center justify-center mb-3 group-hover:from-purple/30 group-hover:to-electric-blue/30 transition-colors">
+                            <IconComponent className="text-purple" size={20} />
+                          </div>
+                          <h4 className="font-semibold text-white text-sm mb-1">{module.name}</h4>
+                          <p className="text-gray-500 text-xs">{module.tagline}</p>
+                        </div>
+                        {/* Connector arrow (except last in each row on mobile, all except last on desktop) */}
+                        {index < aiResearchModules.length - 1 && index % 4 !== 3 && (
+                          <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2">
+                            <ArrowRight size={16} className="text-slate-light/40" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeInUp>
+
+        {/* Detailed Module Cards */}
+        <FadeInUp>
+          <h3 className="text-2xl font-bold text-center mb-8">
+            Eight Integrated Modules
+          </h3>
+        </FadeInUp>
+
+        <StaggerChildren className="grid md:grid-cols-2 gap-6">
+          {aiResearchModules.map((module) => {
+            const IconComponent = module.icon;
+            return (
+              <StaggerItem key={module.name}>
+                <Card variant="feature" className="p-6 h-full">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple to-electric-blue flex items-center justify-center shrink-0">
+                      <IconComponent className="text-white" size={24} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="text-lg font-bold text-white">{module.name}</h4>
+                      </div>
+                      <p className="text-purple text-sm mb-2">{module.tagline}</p>
+                      <p className="text-gray-400 text-sm mb-4">{module.description}</p>
+                      <ul className="grid grid-cols-1 gap-2">
+                        {module.features.map((feature) => (
+                          <li key={feature} className="text-gray-300 text-xs flex items-start gap-2">
+                            <CheckCircle className="text-emerald shrink-0 mt-0.5" size={12} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+              </StaggerItem>
+            );
+          })}
+        </StaggerChildren>
+
+        {/* Vision Statement */}
+        <FadeInUp delay={0.3}>
+          <div className="mt-16 text-center">
+            <Card variant="glass" className="p-8 max-w-4xl mx-auto">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Sparkles className="text-purple" size={20} />
+                <span className="text-purple font-medium text-sm uppercase tracking-wider">Platform Vision</span>
+              </div>
+              <p className="text-gray-300 text-lg leading-relaxed">
+                Transform pharmaceutical research from reactive literature reviews to proactive,
+                AI-driven hypothesis generation. Connect the dots across millions of publications,
+                clinical trials, and internal data to uncover novel therapeutic opportunities faster.
+              </p>
+            </Card>
+          </div>
+        </FadeInUp>
       </Section>
 
       {/* AI Agents */}
