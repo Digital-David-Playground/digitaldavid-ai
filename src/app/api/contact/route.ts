@@ -54,8 +54,11 @@ export async function POST(request: Request) {
     }
 
     // Send notification email to team
+    // Use onboarding@resend.dev until domain is verified, then switch to noreply@digitaldavid.io
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "Digital David <onboarding@resend.dev>";
+
     const { error: teamEmailError } = await resend.emails.send({
-      from: "Digital David <noreply@digitaldavid.io>",
+      from: fromEmail,
       to: ["hello@digitaldavid.io"],
       replyTo: data.email,
       subject: `New ${inquiryLabel} from ${data.name}`,
@@ -122,7 +125,7 @@ export async function POST(request: Request) {
 
     // Send confirmation email to the user
     const { error: userEmailError } = await resend.emails.send({
-      from: "Digital David <noreply@digitaldavid.io>",
+      from: fromEmail,
       to: [data.email],
       subject: "We received your message - Digital David",
       html: `
