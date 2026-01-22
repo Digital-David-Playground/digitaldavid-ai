@@ -56,10 +56,12 @@ export async function POST(request: Request) {
     // Send notification email to team
     // Use onboarding@resend.dev until domain is verified, then switch to noreply@digitaldavid.io
     const fromEmail = process.env.RESEND_FROM_EMAIL || "Digital David <onboarding@resend.dev>";
+    // RESEND_TO_EMAIL should be set to the email you verified in Resend, or hello@digitaldavid.io once domain is verified
+    const toEmail = process.env.RESEND_TO_EMAIL || "hello@digitaldavid.io";
 
     const { error: teamEmailError } = await resend.emails.send({
       from: fromEmail,
-      to: ["hello@digitaldavid.io"],
+      to: [toEmail],
       replyTo: data.email,
       subject: `New ${inquiryLabel} from ${data.name}`,
       html: `
