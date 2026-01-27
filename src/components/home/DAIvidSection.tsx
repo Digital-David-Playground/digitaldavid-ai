@@ -32,8 +32,8 @@ export function DAIvidSection() {
         {/* Left: Content */}
         <FadeInUp>
           <div>
-            <Badge variant="info" className="mb-6">
-              Meet Our AI
+            <Badge variant="default" className="mb-6">
+              Coming Soon
             </Badge>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
