@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -17,20 +18,30 @@ import {
   Phone
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Contact | Digital David",
-  description:
-    "Get in touch with Digital David. Book a discovery call, send us a message, or chat with DAIvid - our AI assistant.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact.meta" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: getAlternates("/contact", locale),
+  };
+}
 
-const daividFeatures = [
-  { icon: MessageSquare, label: "Natural Conversations" },
-  { icon: Clock, label: "24/7 Available" },
-  { icon: Globe, label: "Multilingual" },
-  { icon: Sparkles, label: "AI-Powered" },
-];
+export default async function ContactPage() {
+  const t = await getTranslations("contact");
+  const tCommon = await getTranslations("common.cta");
+  const tHomeCta = await getTranslations("home.cta");
 
-export default function ContactPage() {
+  const tDaivid = await getTranslations("home.daivid");
+
+  const daividFeatures = [
+    { icon: MessageSquare, label: tDaivid("naturalConversations") },
+    { icon: Clock, label: tDaivid("available247") },
+    { icon: Globe, label: tDaivid("multilingual") },
+    { icon: Sparkles, label: tDaivid("aiPowered") },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -38,20 +49,19 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInUp>
             <Badge variant="info" className="mb-6">
-              Contact
+              {t("hero.badge")}
             </Badge>
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Let&apos;s Build
+              {t("hero.title")}
               <br />
-              <span className="gradient-text">Something.</span>
+              <span className="gradient-text">{t("hero.titleHighlight")}</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-400 max-w-2xl">
-              Whether you&apos;re looking to transform your business with AI or
-              have questions about our services - we&apos;d love to hear from you.
+              {t("hero.description")}
             </p>
           </FadeInUp>
         </div>
@@ -64,22 +74,20 @@ export default function ContactPage() {
           <FadeInUp>
             <div>
               <Badge variant="info" className="mb-6">
-                Meet Our AI
+                {t("daivid.badge")}
               </Badge>
 
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Say Hello to{" "}
-                <span className="gradient-text">DAIvid</span>
+                {t("daivid.title")}{" "}
+                <span className="gradient-text">{t("daivid.titleHighlight")}</span>
               </h2>
 
               <p className="text-xl text-gray-300 mb-3">
-                Your AI Sales Development Representative
+                {t("daivid.role")}
               </p>
 
               <p className="text-gray-400 mb-8 max-w-lg">
-                DAIvid is our AI-powered video avatar - always ready to answer your
-                questions about Digital David, our services, and how we can help
-                transform your business with AI engineering.
+                {t("daivid.description")}
               </p>
 
               {/* Feature Pills */}
@@ -96,7 +104,7 @@ export default function ContactPage() {
               </div>
 
               <p className="text-gray-500 text-sm">
-                Click on the video to start a conversation with DAIvid.
+                {t("daivid.clickToChat")}
               </p>
             </div>
           </FadeInUp>
@@ -120,10 +128,10 @@ export default function ContactPage() {
                       <span className="text-4xl font-bold text-white">D</span>
                     </div>
                     <p className="text-gray-400 text-sm mb-4">
-                      Video avatar embed will appear here
+                      {t("daivid.videoPlaceholder")}
                     </p>
                     <p className="text-gray-500 text-xs">
-                      Add your video avatar embed code to replace this placeholder
+                      {t("daivid.placeholderHint")}
                     </p>
                   </div>
                 </div>
@@ -133,7 +141,7 @@ export default function ContactPage() {
                   <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
                     <div className="w-3 h-3 bg-emerald rounded-full animate-pulse" />
                     <span className="text-sm text-gray-300">
-                      DAIvid is ready to chat
+                      {t("daivid.readyToChat")}
                     </span>
                   </div>
                 </div>
@@ -150,10 +158,10 @@ export default function ContactPage() {
           <FadeInUp>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Send Us a Message
+                {t("form.title")}
               </h2>
               <p className="text-gray-400 mb-8">
-                Fill out the form and we&apos;ll get back to you within 24 hours.
+                {t("form.subtitle")}
               </p>
 
               <ContactForm />
@@ -164,10 +172,10 @@ export default function ContactPage() {
           <FadeInUp delay={0.2}>
             <div className="lg:pl-8">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Other Ways to Reach Us
+                {t("info.title")}
               </h2>
               <p className="text-gray-400 mb-8">
-                Prefer a different channel? Here&apos;s how else you can connect.
+                {t("info.subtitle")}
               </p>
 
               <div className="space-y-6">
@@ -178,7 +186,7 @@ export default function ContactPage() {
                       <Mail className="text-electric-blue" size={24} />
                     </div>
                     <div>
-                      <CardTitle className="mb-1 text-lg">Email</CardTitle>
+                      <CardTitle className="mb-1 text-lg">{t("info.email")}</CardTitle>
                       <a
                         href="mailto:hello@digitaldavid.io"
                         className="text-gray-400 hover:text-electric-blue transition-colors"
@@ -196,7 +204,7 @@ export default function ContactPage() {
                       <Phone className="text-purple" size={24} />
                     </div>
                     <div>
-                      <CardTitle className="mb-1 text-lg">Phone</CardTitle>
+                      <CardTitle className="mb-1 text-lg">{t("info.phone")}</CardTitle>
                       <a
                         href="tel:+496997097958"
                         className="text-gray-400 hover:text-electric-blue transition-colors"
@@ -214,11 +222,11 @@ export default function ContactPage() {
                       <MapPin className="text-cyan" size={24} />
                     </div>
                     <div>
-                      <CardTitle className="mb-1 text-lg">Office</CardTitle>
+                      <CardTitle className="mb-1 text-lg">{t("info.office")}</CardTitle>
                       <p className="text-gray-400">
                         Digital David AG
                         <br />
-                        Weserstraße 4
+                        Weserstra&szlig;e 4
                         <br />
                         60329 Frankfurt am Main
                         <br />
@@ -236,8 +244,8 @@ export default function ContactPage() {
       {/* Quick Actions */}
       <Section>
         <SectionHeader
-          title="Quick Actions"
-          subtitle="Not sure where to start? Here are some common paths."
+          title={t("quickActions.title")}
+          subtitle={t("quickActions.subtitle")}
           centered
         />
 
@@ -252,17 +260,16 @@ export default function ContactPage() {
                   <Building2 className="text-white" size={24} />
                 </div>
               </div>
-              <CardTitle className="mb-3">For Enterprises</CardTitle>
+              <CardTitle className="mb-3">{tHomeCta("enterpriseTitle")}</CardTitle>
               <CardDescription className="flex-grow mb-6">
-                Book a 30-minute discovery call to discuss your AI engineering needs.
-                We&apos;ll explore how we can help transform your operations.
+                {t("quickActions.enterpriseDesc")}
               </CardDescription>
               <Button
                 href="mailto:hello@digitaldavid.io?subject=Discovery Call Request"
                 variant="primary"
                 className="w-full"
               >
-                Book a Discovery Call
+                {tCommon("bookCall")}
               </Button>
             </Card>
           </StaggerItem>
@@ -274,17 +281,16 @@ export default function ContactPage() {
                   <Users className="text-white" size={24} />
                 </div>
               </div>
-              <CardTitle className="mb-3">For Talents</CardTitle>
+              <CardTitle className="mb-3">{tHomeCta("talentTitle")}</CardTitle>
               <CardDescription className="flex-grow mb-6">
-                Interested in AI Engineering? Join karriererakete.ai - our AI-native
-                career community launching mid-2026.
+                {t("quickActions.talentDesc")}
               </CardDescription>
               <Button
                 href="https://talentschmiede-ai.vercel.app/karriererakete"
                 variant="secondary"
                 className="w-full"
               >
-                Join karriererakete.ai
+                {t("quickActions.joinKarriererakete")}
               </Button>
             </Card>
           </StaggerItem>
@@ -292,7 +298,7 @@ export default function ContactPage() {
 
         <FadeInUp delay={0.3}>
           <p className="text-center text-gray-500 text-sm mt-12">
-            No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+            {tHomeCta("bottomTagline")}
           </p>
         </FadeInUp>
       </Section>

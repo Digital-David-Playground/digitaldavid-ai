@@ -1,27 +1,33 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { ArrowUpRight } from "lucide-react";
 
-const footerLinks = {
-  company: [
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-    { href: "/karriererakete", label: "Karriererakete" },
-  ],
-  services: [
-    { href: "/engineering", label: "AI Engineering" },
-    { href: "/products", label: "Products" },
-  ],
-  legal: [
-    { href: "/legal/impressum", label: "Impressum" },
-    { href: "/legal/privacy", label: "Privacy" },
-  ],
-  products: [
-    { href: "https://talenty.ai", label: "Talenty.ai", external: true },
-    { href: "https://docuguard.ai", label: "DocuGuard.ai", external: true },
-  ],
-};
+const externalProducts = [
+  { href: "https://talenty.ai", label: "Talenty.ai" },
+  { href: "https://docuguard.ai", label: "DocuGuard.ai" },
+];
 
 export function Footer() {
+  const t = useTranslations("common.footer");
+
+  const companyLinks = [
+    { href: "/about", labelKey: "about" },
+    { href: "/contact", labelKey: "contactLink" },
+    { href: "/karriererakete", labelKey: "karriererakete" },
+  ];
+
+  const servicesLinks = [
+    { href: "/engineering", labelKey: "aiEngineering" },
+    { href: "/products", labelKey: "productsLink" },
+  ];
+
+  const legalLinks = [
+    { href: "/legal/impressum", labelKey: "impressum" },
+    { href: "/legal/privacy", labelKey: "privacy" },
+  ];
+
   return (
     <footer className="bg-midnight border-t border-slate-light/10">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -35,25 +41,24 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
-              AI Engineering for the Agentic Era. We don&apos;t just build AI - we
-              engineer the future.
+              {t("tagline")}
             </p>
             <p className="text-gray-500 text-sm">
-              Frankfurt am Main, Germany
+              {t("location")}
             </p>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h4 className="text-white font-semibold mb-4">{t("company")}</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -62,15 +67,15 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Services</h4>
+            <h4 className="text-white font-semibold mb-4">{t("services")}</h4>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+              {servicesLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="text-gray-400 hover:text-white text-sm transition-colors"
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -79,9 +84,9 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Products</h4>
+            <h4 className="text-white font-semibold mb-4">{t("products")}</h4>
             <ul className="space-y-3">
-              {footerLinks.products.map((link) => (
+              {externalProducts.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -101,24 +106,24 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-slate-light/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Digital David AG. All rights reserved. A company of{" "}
+            &copy; {new Date().getFullYear()} {t("copyright")}{" "}
             <a
               href="https://www.dwg.io"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
             >
-              Digital Workforce Group AG
+              {t("dwg")}
             </a>
           </p>
           <div className="flex gap-6">
-            {footerLinks.legal.map((link) => (
+            {legalLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
               >
-                {link.label}
+                {t(link.labelKey)}
               </Link>
             ))}
           </div>

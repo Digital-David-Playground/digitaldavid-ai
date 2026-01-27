@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -10,55 +11,57 @@ import {
 import { Sparkles, Target, Shield, MapPin, Play, Zap, Users, Heart, MessageCircle, Building2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "About | Digital David",
-  description:
-    "We're a team of AI Engineers based in Frankfurt. Building production AI since 2020.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about.meta" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: getAlternates("/about", locale),
+  };
+}
 
-const philosophy = [
-  {
-    icon: Sparkles,
-    title: "Boutique Quality",
-    description:
-      "We choose our projects. High attention, deep expertise, personal relationships. Premium quality over mass production.",
-  },
-  {
-    icon: Target,
-    title: "Production Obsessed",
-    description:
-      "We don't do POCs that never ship. We build for production from day one. Working AI, not slideware.",
-  },
-  {
-    icon: Shield,
-    title: "Ethical AI",
-    description:
-      "AI governance isn't overhead - it's our competitive advantage. Responsible AI, transparent decisions, full compliance.",
-  },
-];
+export default async function AboutPage() {
+  const t = await getTranslations("about");
+  const tCommon = await getTranslations("common.cta");
+  const tHomeCta = await getTranslations("home.cta");
 
-const ecosystem = [
-  {
-    name: "Digital David AG",
-    role: "AI Engineering & Products",
-    description:
-      "The AI engineering powerhouse. We architect, build, and deploy production AI systems.",
-  },
-  {
-    name: "Talentschmiede AG",
-    role: "IT Talent Academy",
-    description:
-      "1,000+ talents placed, 92% retention. €25,000 training investment per person.",
-  },
-  {
-    name: "Talentrecruiters GmbH",
-    role: "Recruiting Services",
-    description:
-      "Specialized IT recruiting, powered by our own AI technology.",
-  },
-];
+  const philosophy = [
+    {
+      icon: Sparkles,
+      title: t("philosophy.boutiqueTitle"),
+      description: t("philosophy.boutiqueDesc"),
+    },
+    {
+      icon: Target,
+      title: t("philosophy.productionTitle"),
+      description: t("philosophy.productionDesc"),
+    },
+    {
+      icon: Shield,
+      title: t("philosophy.ethicalTitle"),
+      description: t("philosophy.ethicalDesc"),
+    },
+  ];
 
-export default function AboutPage() {
+  const ecosystem = [
+    {
+      name: t("ecosystem.ddName"),
+      role: t("ecosystem.ddRole"),
+      description: t("ecosystem.ddDesc"),
+    },
+    {
+      name: t("ecosystem.tsName"),
+      role: t("ecosystem.tsRole"),
+      description: t("ecosystem.tsDesc"),
+    },
+    {
+      name: t("ecosystem.trName"),
+      role: t("ecosystem.trRole"),
+      description: t("ecosystem.trDesc"),
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -66,21 +69,19 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInUp>
             <Badge variant="info" className="mb-6">
-              About Us
+              {t("hero.badge")}
             </Badge>
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              We&apos;re AI Engineers.
+              {t("hero.title")}
               <br />
-              <span className="text-gray-400">That&apos;s who we are.</span>
+              <span className="text-gray-400">{t("hero.subtitle")}</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-400 max-w-2xl">
-              A small team based in Frankfurt, building production AI since 2020.
-              We were AI Engineers before it was trendy - and we&apos;ll be here
-              long after the hype settles.
+              {t("hero.description")}
             </p>
           </FadeInUp>
         </div>
@@ -101,7 +102,7 @@ export default function AboutPage() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-electric-blue to-cyan flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-electric-blue/30">
                     <Play size={32} className="text-white ml-1" />
                   </div>
-                  <p className="text-gray-400 text-sm">Meet the team</p>
+                  <p className="text-gray-400 text-sm">{t("video.meetTeam")}</p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -112,12 +113,11 @@ export default function AboutPage() {
           <FadeInUp delay={0.2}>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Engineers First, <span className="gradient-text">Always</span>
+                {t("video.title")} <span className="gradient-text">{t("video.titleHighlight")}</span>
               </h2>
 
               <p className="text-gray-400 mb-8">
-                We started as engineers who got frustrated with AI projects that never made it to production.
-                PowerPoints don&apos;t solve business problems. Working code does. That&apos;s why we build.
+                {t("video.description")}
               </p>
 
               <div className="space-y-4">
@@ -126,8 +126,8 @@ export default function AboutPage() {
                     <Zap className="text-electric-blue" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Since 2020</h3>
-                    <p className="text-gray-400 text-sm">Building production AI before the hype. Still here after.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.since2020Title")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.since2020Desc")}</p>
                   </div>
                 </div>
 
@@ -136,8 +136,8 @@ export default function AboutPage() {
                     <Users className="text-purple" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Small Team, Big Impact</h3>
-                    <p className="text-gray-400 text-sm">Senior engineers only. No junior consultants learning on your project.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.smallTeamTitle")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.smallTeamDesc")}</p>
                   </div>
                 </div>
 
@@ -146,8 +146,8 @@ export default function AboutPage() {
                     <Heart className="text-cyan" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Frankfurt Based</h3>
-                    <p className="text-gray-400 text-sm">In the heart of Europe&apos;s financial and tech hub.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.frankfurtTitle")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.frankfurtDesc")}</p>
                   </div>
                 </div>
               </div>
@@ -159,8 +159,8 @@ export default function AboutPage() {
       {/* Philosophy */}
       <Section variant="dark">
         <SectionHeader
-          title="Our Philosophy"
-          subtitle="What drives us. What makes us different."
+          title={t("philosophy.title")}
+          subtitle={t("philosophy.subtitle")}
           centered
         />
 
@@ -182,8 +182,8 @@ export default function AboutPage() {
       {/* Ecosystem */}
       <Section>
         <SectionHeader
-          title="The Ecosystem"
-          subtitle="Digital David AG is part of The Digital Workforce Group - a family of companies focused on digital transformation and talent development."
+          title={t("ecosystem.title")}
+          subtitle={t("ecosystem.subtitle")}
           centered
         />
 
@@ -199,23 +199,22 @@ export default function AboutPage() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <CardTitle className="text-2xl">The Digital Workforce Group AG</CardTitle>
+                    <CardTitle className="text-2xl">{t("ecosystem.dwgName")}</CardTitle>
                     <ExternalLink size={18} className="text-gray-500 group-hover:text-purple transition-colors" />
                   </div>
-                  <p className="text-purple text-sm mb-3">Holding Company</p>
+                  <p className="text-purple text-sm mb-3">{t("ecosystem.dwgRole")}</p>
                   <CardDescription className="max-w-2xl">
-                    Cross-industry holding for digital transformation. Consulting, services, and software solutions
-                    focused on talent acquisition, digitalization, and artificial intelligence.
+                    {t("ecosystem.dwgDesc")}
                   </CardDescription>
                 </div>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <div className="text-center px-4">
                     <p className="text-2xl font-bold text-white">80+</p>
-                    <p className="text-gray-500">Employees</p>
+                    <p className="text-gray-500">{t("ecosystem.employees")}</p>
                   </div>
                   <div className="text-center px-4">
                     <p className="text-2xl font-bold text-white">30%</p>
-                    <p className="text-gray-500">YoY Growth</p>
+                    <p className="text-gray-500">{t("ecosystem.yoyGrowth")}</p>
                   </div>
                 </div>
               </div>
@@ -247,8 +246,8 @@ export default function AboutPage() {
         <FadeInUp delay={0.4}>
           <div className="text-center mt-12">
             <p className="text-gray-400">
-              Combined: <span className="text-white font-semibold">1,000+ talents placed</span>,{" "}
-              <span className="text-white font-semibold">92% retention rate</span>
+              {t("ecosystem.combined")} <span className="text-white font-semibold">{t("ecosystem.talentsPlaced")}</span>,{" "}
+              <span className="text-white font-semibold">{t("ecosystem.retentionRate")}</span>
             </p>
           </div>
         </FadeInUp>
@@ -264,19 +263,19 @@ export default function AboutPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-white mb-2">
-                  Frankfurt am Main
+                  {t("location.title")}
                 </h3>
                 <p className="text-gray-400 mb-4">
                   Digital David AG
                   <br />
-                  Weserstraße 4
+                  Weserstra&szlig;e 4
                   <br />
                   60329 Frankfurt am Main
                   <br />
                   Germany
                 </p>
                 <p className="text-gray-500 text-sm">
-                  In the heart of Europe&apos;s financial and tech hub.
+                  {t("location.inHeart")}
                 </p>
               </div>
             </div>
@@ -293,15 +292,15 @@ export default function AboutPage() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate/50 border border-slate-light/20 rounded-full mb-6">
                 <MessageCircle size={16} className="text-electric-blue" />
-                <span className="text-sm text-gray-300">We build AI, but we talk human to human</span>
+                <span className="text-sm text-gray-300">{tHomeCta("badge")}</span>
               </div>
 
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Let&apos;s Build <span className="gradient-text">Together</span>
+                {t("cta.title")} <span className="gradient-text">{t("cta.titleHighlight")}</span>
               </h2>
 
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Behind every AI solution is a conversation. Let&apos;s start yours.
+                {tHomeCta("subtitle")}
               </p>
             </div>
           </FadeInUp>
@@ -320,10 +319,10 @@ export default function AboutPage() {
                       <Play size={32} className="text-white ml-1" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      Our Story
+                      {t("cta.videoTitle")}
                     </h3>
                     <p className="text-gray-400 text-sm md:text-base">
-                      From engineers to AI company
+                      {t("cta.videoSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -340,12 +339,12 @@ export default function AboutPage() {
                     <Building2 className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Enterprises</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("enterpriseTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Let&apos;s discuss how we can help transform your business with AI. Book a discovery call.
+                  {t("cta.enterpriseDesc")}
                 </CardDescription>
                 <Button href="/contact" variant="primary" className="w-full">
-                  Book a Discovery Call
+                  {tCommon("bookCall")}
                 </Button>
               </Card>
             </StaggerItem>
@@ -357,9 +356,9 @@ export default function AboutPage() {
                     <Users className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Talents</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("talentTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Join the AI engineering revolution. Explore opportunities with karriererakete.ai.
+                  {tHomeCta("talentDesc")}
                 </CardDescription>
                 <Button href="https://talentschmiede-ai.vercel.app/karriererakete" variant="secondary" className="w-full">
                   karriererakete.ai
@@ -370,7 +369,7 @@ export default function AboutPage() {
 
           <FadeInUp delay={0.4}>
             <p className="text-center text-gray-500 text-sm mt-12">
-              No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+              {tHomeCta("bottomTagline")}
             </p>
           </FadeInUp>
         </div>

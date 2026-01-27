@@ -1,21 +1,24 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Stat, StatGrid } from "@/components/ui/Stat";
 import { FadeInUp, StaggerChildren, StaggerItem } from "@/components/animations/FadeInUp";
 
-const stats = [
-  { value: "40%", label: "Enterprise apps embed AI agents by 2026" },
-  { value: "$52B", label: "Agentic AI market by 2030" },
-  { value: "155%", label: "NLP demand growth" },
-];
-
 export function ShiftSection() {
+  const t = useTranslations("home.shift");
+
+  const stats = [
+    { value: t("stat1Value"), label: t("stat1Label") },
+    { value: t("stat2Value"), label: t("stat2Label") },
+    { value: t("stat3Value"), label: t("stat3Label") },
+  ];
+
   return (
     <Section variant="dark">
       <FadeInUp>
         <SectionHeader
-          title="2026: The Year AI Gets Real"
+          title={t("title")}
           centered
         />
       </FadeInUp>
@@ -33,10 +36,10 @@ export function ShiftSection() {
       <FadeInUp delay={0.4}>
         <div className="text-center max-w-3xl mx-auto">
           <p className="text-xl md:text-2xl text-gray-300 mb-4">
-            Most companies are experimenting.
+            {t("experimenting")}
           </p>
           <p className="text-2xl md:text-3xl font-semibold text-white">
-            We&apos;re shipping.
+            {t("shipping")}
           </p>
         </div>
       </FadeInUp>

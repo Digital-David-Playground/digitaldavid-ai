@@ -1,11 +1,15 @@
-import { Metadata } from "next";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { FadeInUp } from "@/components/animations/FadeInUp";
 
-export const metadata: Metadata = {
-  title: "Impressum | Digital David",
-  description: "Impressum und rechtliche Angaben der Digital David AG",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "Impressum | Digital David",
+    description: "Impressum und rechtliche Angaben der Digital David AG",
+    alternates: getAlternates("/legal/impressum", locale),
+  };
+}
 
 export default function ImpressumPage() {
   return (

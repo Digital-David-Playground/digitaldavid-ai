@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,7 +34,7 @@ export const metadata: Metadata = {
     description: "We don't just build AI. We engineer the future.",
     url: "https://digitaldavid.io",
     siteName: "Digital David",
-    locale: "en_US",
+    locale: "de_DE",
     type: "website",
   },
   twitter: {
@@ -56,11 +54,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="de" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen bg-deep-space text-white antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

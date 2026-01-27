@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -8,11 +9,13 @@ import { FadeInUp } from "@/components/animations/FadeInUp";
 import { Rocket } from "lucide-react";
 
 export function FutureSection() {
+  const t = useTranslations("home.future");
+
   return (
     <Section>
       <FadeInUp>
         <div className="flex items-center gap-3 mb-8">
-          <Badge variant="info">Launching Mid-2026</Badge>
+          <Badge variant="info">{t("badge")}</Badge>
         </div>
       </FadeInUp>
 
@@ -27,28 +30,26 @@ export function FutureSection() {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="gradient-text">karriererakete.ai</span>
+              <span className="gradient-text">{t("title")}</span>
             </h2>
 
             <p className="text-xl text-gray-300 mb-3">
-              Our Next AI Product: The Career Community
+              {t("subtitle")}
             </p>
 
             <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-              AI-powered career coaching meets community. Where talents find their tribe,
-              companies build authentic connections, and AI guides every step.
+              {t("description")}
             </p>
 
             <Button
               href="https://talentschmiede-ai.vercel.app/karriererakete"
               size="lg"
             >
-              Join the Waitlist
+              {t("joinWaitlist")}
             </Button>
 
             <p className="text-gray-500 text-sm mt-8">
-              Built on Talentschmiede&apos;s proven model - 1,000+ talents placed,
-              92% retention, €25,000 training investment each.
+              {t("proven")}
             </p>
           </div>
         </Card>

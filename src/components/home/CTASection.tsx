@@ -1,35 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { FadeInUp, StaggerChildren, StaggerItem } from "@/components/animations/FadeInUp";
 import { Building2, Users, Play, MessageCircle, Sparkles } from "lucide-react";
 
-const ctaOptions = [
-  {
-    icon: Building2,
-    title: "For Enterprises",
-    description:
-      "Let's discuss how AI engineering can transform your operations. Book a 30-minute discovery call.",
-    cta: "Book a Discovery Call",
-    href: "/contact",
-    primary: true,
-  },
-  {
-    icon: Users,
-    title: "For Talents",
-    description:
-      "Join the AI engineering revolution. Explore opportunities with karriererakete.ai.",
-    cta: "karriererakete.ai",
-    href: "https://talentschmiede-ai.vercel.app/karriererakete",
-    primary: false,
-  },
-];
-
 export function CTASection() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const t = useTranslations("home.cta");
+  const tc = useTranslations("common.cta");
+
+  const ctaOptions = [
+    {
+      icon: Building2,
+      title: t("enterpriseTitle"),
+      description: t("enterpriseDesc"),
+      cta: tc("bookCall"),
+      href: "/contact",
+      primary: true,
+    },
+    {
+      icon: Users,
+      title: t("talentTitle"),
+      description: t("talentDesc"),
+      cta: "karriererakete.ai",
+      href: "https://talentschmiede-ai.vercel.app/karriererakete",
+      primary: false,
+    },
+  ];
 
   return (
     <Section variant="gradient" className="relative overflow-hidden">
@@ -42,15 +43,15 @@ export function CTASection() {
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate/50 border border-slate-light/20 rounded-full mb-6">
               <MessageCircle size={16} className="text-electric-blue" />
-              <span className="text-sm text-gray-300">We build AI, but we talk human to human</span>
+              <span className="text-sm text-gray-300">{t("badge")}</span>
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Ready to Build the <span className="gradient-text">Future</span>?
+              {t("title")} <span className="gradient-text">{t("titleHighlight")}</span>?
             </h2>
 
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Behind every AI solution is a conversation. Let&apos;s start yours.
+              {t("subtitle")}
             </p>
           </div>
         </FadeInUp>
@@ -79,10 +80,10 @@ export function CTASection() {
                         <Play size={32} className="text-white ml-1" />
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                        See How We Work
+                        {t("videoTitle")}
                       </h3>
                       <p className="text-gray-400 text-sm md:text-base">
-                        A quick look at our approach to AI engineering
+                        {t("videoSubtitle")}
                       </p>
                     </div>
                   </div>
@@ -95,7 +96,7 @@ export function CTASection() {
                   {/* Video placeholder - replace with actual video embed */}
                   <div className="text-center">
                     <Sparkles size={48} className="text-electric-blue mx-auto mb-4 animate-pulse" />
-                    <p className="text-gray-400">Video coming soon</p>
+                    <p className="text-gray-400">{t("videoComingSoon")}</p>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -103,7 +104,7 @@ export function CTASection() {
                       }}
                       className="mt-4 text-sm text-electric-blue hover:underline"
                     >
-                      Close
+                      {tc("close")}
                     </button>
                   </div>
                 </div>
@@ -150,7 +151,7 @@ export function CTASection() {
         {/* Bottom tagline */}
         <FadeInUp delay={0.4}>
           <p className="text-center text-gray-500 text-sm mt-12">
-            No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+            {t("bottomTagline")}
           </p>
         </FadeInUp>
       </div>

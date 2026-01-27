@@ -1,0 +1,567 @@
+{
+  "common": {
+    "nav": {
+      "engineering": "Engineering",
+      "services": "Services",
+      "products": "Produkte",
+      "about": "Über uns",
+      "contact": "Kontakt"
+    },
+    "footer": {
+      "tagline": "AI Engineering für die Agentic Era. Wir bauen nicht nur AI – wir gestalten die Zukunft.",
+      "location": "Frankfurt am Main, Deutschland",
+      "company": "Unternehmen",
+      "services": "Services",
+      "products": "Produkte",
+      "legal": "Rechtliches",
+      "about": "Über uns",
+      "contactLink": "Kontakt",
+      "karriererakete": "Karriererakete",
+      "aiEngineering": "AI Engineering",
+      "productsLink": "Produkte",
+      "impressum": "Impressum",
+      "privacy": "Datenschutz",
+      "copyright": "Digital David AG. Alle Rechte vorbehalten. Ein Unternehmen der",
+      "dwg": "Digital Workforce Group AG"
+    },
+    "cta": {
+      "bookCall": "Discovery Call buchen",
+      "learnMore": "Mehr erfahren",
+      "explore": "Entdecken",
+      "talkToUs": "Sprechen Sie mit uns",
+      "getStarted": "Loslegen",
+      "joinWaitlist": "Auf die Warteliste",
+      "sendMessage": "Nachricht senden",
+      "exploreWork": "Unsere Arbeit entdecken",
+      "bookACall": "Gespräch buchen",
+      "viewAll": "Alle anzeigen",
+      "close": "Schließen"
+    },
+    "language": {
+      "de": "DE",
+      "en": "EN"
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "Digital David | AI Engineering für die Agentic Era",
+      "description": "Wir entwickeln AI-Systeme, die funktionieren. Agentische AI, LLM Engineering und AI-Produkte aus Frankfurt."
+    },
+    "hero": {
+      "tagline": "AI ENGINEERING FÜR DIE AGENTIC ERA",
+      "title": "Wir gestalten",
+      "titleHighlight": "die Zukunft.",
+      "description": "Wir entwerfen, bauen und betreiben AI-Systeme, die funktionieren. Multi-Agent-Orchestrierung, LLM Engineering und produktionsreife AI-Produkte."
+    },
+    "shift": {
+      "title": "2026: Das Jahr, in dem AI real wird",
+      "stat1Value": "40%",
+      "stat1Label": "der Enterprise-Apps integrieren AI-Agents bis 2026",
+      "stat2Value": "$52B",
+      "stat2Label": "Agentischer AI-Markt bis 2030",
+      "stat3Value": "155%",
+      "stat3Label": "NLP-Nachfragewachstum",
+      "experimenting": "Die meisten Unternehmen experimentieren.",
+      "shipping": "Wir liefern."
+    },
+    "engineering": {
+      "title": "Was wir bauen",
+      "subtitle": "Drei Säulen unserer Arbeit. Klar, fokussiert, produktionsbesessen.",
+      "agenticTitle": "Agentische Systeme",
+      "agenticDesc": "Multi-Agent-Orchestrierung für Unternehmen. Wir bauen autonome AI-Systeme, die denken, planen und komplexe Workflows ausführen.",
+      "productsTitle": "AI-Produkte",
+      "productsDesc": "Produktionsreife AI-Plattformen. Von Recruiting-Automatisierung bis Dokumenten-Intelligenz – wir liefern AI, die funktioniert.",
+      "transformTitle": "AI-Transformation",
+      "transformDesc": "Von der Strategie zum Skalenbetrieb. Wir begleiten Unternehmen von der AI-Experimentierung zur Produktionsreife."
+    },
+    "daivid": {
+      "badge": "Demnächst verfügbar",
+      "title": "Sag Hallo zu",
+      "titleHighlight": "DAIvid",
+      "role": "Ihr AI Sales Development Representative",
+      "description": "DAIvid ist unser AI-gestützter Video-Avatar – immer bereit, Ihre Fragen über Digital David, unsere Services und wie wir Ihr Business mit AI Engineering transformieren können, zu beantworten.",
+      "clickToChat": "Klicken Sie auf das Video, um ein Gespräch mit DAIvid zu starten.",
+      "videoPlaceholder": "Video-Avatar-Embed erscheint hier",
+      "placeholderHint": "Fügen Sie Ihren Video-Avatar-Embed-Code ein, um diesen Platzhalter zu ersetzen",
+      "readyToChat": "DAIvid ist bereit zu chatten",
+      "naturalConversations": "Natürliche Gespräche",
+      "available247": "24/7 Verfügbar",
+      "multilingual": "Mehrsprachig",
+      "aiPowered": "AI-gestützt"
+    },
+    "products": {
+      "title": "Produktions-AI – Heute Live",
+      "subtitle": "Wir beraten nicht nur – wir bauen und liefern. Diese Produkte bedienen jetzt Kunden.",
+      "live": "Live",
+      "talenty": {
+        "name": "Talenty.ai",
+        "tagline": "AI-gestützte Recruiting-Plattform",
+        "stat1": "schnelleres Hiring",
+        "stat2": "Qualitätsverbesserung",
+        "stat3": "Kostenersparnis",
+        "feature1": "Multi-Agent Kandidatensuche",
+        "feature2": "AI-Sprachinterviews via Talky",
+        "feature3": "RAG-gestütztes Matching",
+        "feature4": "Multi-Channel-Orchestrierung",
+        "link": "Talenty.ai besuchen"
+      },
+      "talky": {
+        "name": "Talky",
+        "tagline": "AI-Interview-Automatisierung",
+        "stat1": "Zeitersparnis",
+        "stat2": "Sprachen",
+        "stat3": "Zufriedenheit",
+        "feature1": "Telefon-, Video- & WhatsApp-Interviews",
+        "feature2": "24/7 automatisiertes Screening",
+        "feature3": "Echtzeit-AI-Antworten",
+        "feature4": "Sofortige Kandidaten-Insights",
+        "link": "Talky besuchen"
+      },
+      "docuguard": {
+        "name": "DocuGuard.ai",
+        "tagline": "DSGVO-Compliance-Automatisierung",
+        "stat1": "Aufwandsreduzierung",
+        "stat2": "Dokumente verarbeitet",
+        "feature1": "Dokumentenklassifizierung",
+        "feature2": "Auto-Schwärzung",
+        "feature3": "Compliance-Agents",
+        "link": "Mehr erfahren"
+      },
+      "factify": {
+        "name": "Factify.ai",
+        "tagline": "AI-Foundation-Plattform",
+        "stat1": "AI Journeys",
+        "stat2": "Uptime SLA",
+        "feature1": "Customer Journey",
+        "feature2": "Legal Journey",
+        "feature3": "Market Intelligence",
+        "link": "Mehr erfahren"
+      },
+      "factifyPharma": {
+        "name": "Factify Pharma",
+        "tagline": "Pharmazeutische AI-Suite",
+        "stat1": "schnellere Verarbeitung",
+        "stat2": "Entity-Genauigkeit",
+        "feature1": "Pharma-Forschung",
+        "feature2": "CTD-AI Suite",
+        "feature3": "Studienmanagement",
+        "feature4": "GxP-Compliance",
+        "link": "Mehr erfahren"
+      },
+      "factifyFinance": {
+        "name": "Factify Finance",
+        "tagline": "Banking & Versicherungs-AI",
+        "stat1": "schnellere Schadenbearbeitung",
+        "stat2": "Betrugserkennung",
+        "feature1": "Versicherungsbetrieb",
+        "feature2": "Banking & Zahlungen",
+        "feature3": "Investment & Wealth",
+        "feature4": "AML-Compliance",
+        "link": "Mehr erfahren"
+      }
+    },
+    "future": {
+      "badge": "Start Mitte 2026",
+      "title": "karriererakete.ai",
+      "subtitle": "Unser nächstes AI-Produkt: Die Karriere-Community",
+      "description": "AI-gesteuertes Karriere-Coaching trifft auf Community. Wo Talente ihren Tribe finden, Unternehmen authentische Verbindungen aufbauen und AI jeden Schritt begleitet.",
+      "joinWaitlist": "Auf die Warteliste",
+      "proven": "Aufgebaut auf dem bewährten Modell von Talentschmiede – 1.000+ platzierte Talente, 92% Verbleibquote, €25.000 Trainings-Investment pro Person."
+    },
+    "cta": {
+      "badge": "Wir bauen AI, aber wir sprechen von Mensch zu Mensch",
+      "title": "Bereit, die",
+      "titleHighlight": "Zukunft",
+      "titleSuffix": "zu bauen?",
+      "subtitle": "Hinter jeder AI-Lösung steht ein Gespräch. Lassen Sie uns Ihres beginnen.",
+      "videoTitle": "So arbeiten wir",
+      "videoSubtitle": "Ein kurzer Einblick in unseren Ansatz für AI Engineering",
+      "videoComingSoon": "Video kommt bald",
+      "enterpriseTitle": "Für Unternehmen",
+      "enterpriseDesc": "Lassen Sie uns besprechen, wie AI Engineering Ihre Abläufe transformieren kann. Buchen Sie ein 30-minütiges Discovery-Gespräch.",
+      "talentTitle": "Für Talente",
+      "talentDesc": "Werden Sie Teil der AI-Engineering-Revolution. Entdecken Sie Möglichkeiten mit karriererakete.ai.",
+      "bottomTagline": "Keine Chatbots. Keine Formulare, die im Nichts verschwinden. Echte Gespräche mit echten Engineers."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Über uns | Digital David",
+      "description": "Wir sind ein Team von AI Engineers mit Sitz in Frankfurt. Wir bauen produktionsreife AI seit 2020."
+    },
+    "hero": {
+      "badge": "Über uns",
+      "title": "Wir sind AI Engineers.",
+      "subtitle": "Das ist, wer wir sind.",
+      "description": "Ein kleines Team mit Sitz in Frankfurt, das seit 2020 produktionsreife AI baut. Wir waren AI Engineers, bevor es trendy war – und wir werden hier sein, lange nachdem der Hype sich gelegt hat."
+    },
+    "video": {
+      "meetTeam": "Lernen Sie das Team kennen",
+      "title": "Engineers First,",
+      "titleHighlight": "Immer",
+      "description": "Wir haben als Engineers angefangen, die frustriert waren von AI-Projekten, die nie in Produktion gingen. PowerPoints lösen keine Business-Probleme. Funktionierender Code schon. Deshalb bauen wir.",
+      "since2020Title": "Seit 2020",
+      "since2020Desc": "Produktionsreife AI gebaut, bevor es der Hype war. Immer noch hier.",
+      "smallTeamTitle": "Kleines Team, großer Impact",
+      "smallTeamDesc": "Nur Senior Engineers. Keine Junior-Berater, die auf Ihrem Projekt lernen.",
+      "frankfurtTitle": "Standort Frankfurt",
+      "frankfurtDesc": "Im Herzen von Europas Finanz- und Tech-Hub."
+    },
+    "philosophy": {
+      "title": "Unsere Philosophie",
+      "subtitle": "Was uns antreibt. Was uns unterscheidet.",
+      "boutiqueTitle": "Boutique-Qualität",
+      "boutiqueDesc": "Wir wählen unsere Projekte. Höchste Aufmerksamkeit, tiefe Expertise, persönliche Beziehungen. Premium-Qualität statt Massenproduktion.",
+      "productionTitle": "Produktionsbesessen",
+      "productionDesc": "Wir machen keine POCs, die nie live gehen. Wir bauen ab Tag eins für die Produktion. Funktionierende AI, nicht Slideware.",
+      "ethicalTitle": "Ethische AI",
+      "ethicalDesc": "AI Governance ist kein Overhead – es ist unser Wettbewerbsvorteil. Verantwortungsvolle AI, transparente Entscheidungen, volle Compliance."
+    },
+    "ecosystem": {
+      "title": "Das Ökosystem",
+      "subtitle": "Digital David AG ist Teil der Digital Workforce Group – einer Unternehmensfamilie für digitale Transformation und Talententwicklung.",
+      "dwgName": "The Digital Workforce Group AG",
+      "dwgRole": "Holding-Gesellschaft",
+      "dwgDesc": "Branchenübergreifende Holding für digitale Transformation. Beratung, Dienstleistungen und Softwarelösungen mit Fokus auf Talentakquise, Digitalisierung und künstliche Intelligenz.",
+      "employees": "Mitarbeiter",
+      "yoyGrowth": "Jährliches Wachstum",
+      "ddName": "Digital David AG",
+      "ddRole": "AI Engineering & Produkte",
+      "ddDesc": "Das AI-Engineering-Kraftwerk. Wir entwerfen, bauen und betreiben produktionsreife AI-Systeme.",
+      "tsName": "Talentschmiede AG",
+      "tsRole": "IT Talent Academy",
+      "tsDesc": "1.000+ platzierte Talente, 92% Verbleibquote. €25.000 Trainings-Investment pro Person.",
+      "trName": "Talentrecruiters GmbH",
+      "trRole": "Recruiting Services",
+      "trDesc": "Spezialisiertes IT-Recruiting, angetrieben von unserer eigenen AI-Technologie.",
+      "combined": "Zusammen:",
+      "talentsPlaced": "1.000+ platzierte Talente",
+      "retentionRate": "92% Verbleibquote"
+    },
+    "location": {
+      "title": "Frankfurt am Main",
+      "inHeart": "Im Herzen von Europas Finanz- und Tech-Hub."
+    },
+    "cta": {
+      "title": "Lass uns gemeinsam",
+      "titleHighlight": "bauen",
+      "videoTitle": "Unsere Story",
+      "videoSubtitle": "Von Engineers zur AI-Company",
+      "enterpriseDesc": "Lassen Sie uns besprechen, wie wir Ihr Business mit AI transformieren können. Buchen Sie einen Discovery Call."
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakt | Digital David",
+      "description": "Nehmen Sie Kontakt mit Digital David auf. Buchen Sie ein Discovery-Gespräch, senden Sie uns eine Nachricht oder chatten Sie mit DAIvid."
+    },
+    "hero": {
+      "badge": "Kontakt",
+      "title": "Lass uns etwas",
+      "titleHighlight": "Aufbauen.",
+      "description": "Ob Sie Ihr Business mit AI transformieren möchten oder Fragen zu unseren Services haben – wir freuen uns auf Ihre Nachricht."
+    },
+    "daivid": {
+      "badge": "Unser AI",
+      "title": "Sag Hallo zu",
+      "titleHighlight": "DAIvid",
+      "role": "Ihr AI Sales Development Representative",
+      "description": "DAIvid ist unser AI-gestützter Video-Avatar – immer bereit, Ihre Fragen über Digital David, unsere Services und wie wir Ihr Business mit AI Engineering transformieren können, zu beantworten.",
+      "clickToChat": "Klicken Sie auf das Video, um ein Gespräch mit DAIvid zu starten.",
+      "videoPlaceholder": "Video-Avatar-Embed erscheint hier",
+      "placeholderHint": "Fügen Sie Ihren Video-Avatar-Embed-Code ein, um diesen Platzhalter zu ersetzen",
+      "readyToChat": "DAIvid ist bereit zu chatten"
+    },
+    "form": {
+      "title": "Nachricht senden",
+      "subtitle": "Füllen Sie das Formular aus und wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      "name": "Name",
+      "email": "E-Mail",
+      "company": "Unternehmen",
+      "inquiryType": "Art der Anfrage",
+      "message": "Nachricht",
+      "namePlaceholder": "Ihr Name",
+      "emailPlaceholder": "ihre@email.com",
+      "companyPlaceholder": "Ihr Unternehmen",
+      "messagePlaceholder": "Erzählen Sie uns von Ihrem Projekt oder was Sie besprechen möchten...",
+      "discoveryCall": "Discovery Call",
+      "projectInquiry": "Projektanfrage",
+      "partnership": "Partnerschaft",
+      "other": "Sonstiges",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "successTitle": "Nachricht gesendet!",
+      "successMessage": "Nachricht gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      "sendAnother": "Weitere Nachricht senden",
+      "errorMessage": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "responseTime": "Wir antworten in der Regel innerhalb von 24 Stunden. Kein Spam, versprochen.",
+      "required": "*"
+    },
+    "info": {
+      "title": "Weitere Kontaktmöglichkeiten",
+      "subtitle": "Sie bevorzugen einen anderen Kanal? So können Sie uns noch erreichen.",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "office": "Büro"
+    },
+    "quickActions": {
+      "title": "Schnellauswahl",
+      "subtitle": "Nicht sicher, wo Sie anfangen sollen? Hier sind einige gängige Wege.",
+      "enterpriseDesc": "Buchen Sie ein 30-minütiges Discovery-Gespräch zu Ihren AI-Engineering-Anforderungen. Wir erkunden, wie wir Ihre Abläufe transformieren können.",
+      "talentDesc": "Interesse an AI Engineering? Treten Sie karriererakete.ai bei – unserer AI-nativen Karriere-Community, die Mitte 2026 startet.",
+      "joinKarriererakete": "Bei karriererakete.ai mitmachen"
+    }
+  },
+  "engineering": {
+    "meta": {
+      "title": "AI Engineering | Digital David",
+      "description": "Wir entwerfen, bauen und betreiben AI-Systeme. Agentische AI, LLM Engineering, Conversational AI und Dokumenten-Intelligenz."
+    },
+    "hero": {
+      "badge": "AI Engineering",
+      "title": "AI Engineering",
+      "titleHighlight": "für die Agentic Era",
+      "description": "Wir beraten nicht. Wir entwerfen, bauen und betreiben. Produktionsreife AI-Systeme, die ab Tag eins funktionieren."
+    },
+    "video": {
+      "watchHow": "Sehen Sie, wie wir arbeiten",
+      "title": "AI Engineering, das",
+      "titleHighlight": "wirklich funktioniert",
+      "description": "Wir sind keine Berater, die Slide Decks übergeben. Wir sind Engineers, die produktionsreife AI-Systeme bauen. Von Multi-Agent-Orchestrierung bis Dokumenten-Intelligenz – wir liefern funktionierende Lösungen in Wochen, nicht Monaten.",
+      "shipFastTitle": "Schnell liefern",
+      "shipFastDesc": "Tage bis zum ersten Ergebnis. Funktionierende Prototypen, keine PowerPoints.",
+      "productionTitle": "Produktionsreif",
+      "productionDesc": "Enterprise-Grade Sicherheit, Skalierbarkeit und Zuverlässigkeit von Anfang an.",
+      "ownershipTitle": "Volles Eigentum",
+      "ownershipDesc": "Ihr Code, Ihr IP, Ihre Infrastruktur. Kein Vendor Lock-in."
+    },
+    "competencies": {
+      "title": "Unsere Kompetenzen",
+      "subtitle": "Tiefe Expertise in den Technologien, die für 2026 und darüber hinaus zählen.",
+      "agenticTitle": "Agentische AI-Systeme",
+      "agenticDesc": "Multi-Agent-Orchestrierung, Agent Control Planes, MCP-Integration und Workflow-Automatisierung für Unternehmen.",
+      "llmTitle": "LLM Engineering",
+      "llmDesc": "RAG-Systeme, Fine-Tuning, Prompt Engineering, Modellauswahl und Vektordatenbank-Integration.",
+      "conversationalTitle": "Conversational AI",
+      "conversationalDesc": "Voice Agents, Chat-Systeme, Multi-Channel-Deployment und 50+ Sprachunterstützung.",
+      "documentTitle": "Dokumenten-Intelligenz",
+      "documentDesc": "Klassifizierung, Entity-Extraktion, Compliance-Automatisierung und OCR-Verarbeitung.",
+      "productTitle": "AI-Produktentwicklung",
+      "productDesc": "Full-Stack-AI-Produkte, White-Label-Lösungen und Plattform-Architektur.",
+      "transformTitle": "AI-Transformation",
+      "transformDesc": "Strategieentwicklung, Roadmapping, Team-Training, Governance und Scale-Ops."
+    },
+    "techStack": {
+      "title": "Unser Tech Stack",
+      "models": "Modelle",
+      "frameworks": "Frameworks",
+      "infra": "Infrastruktur",
+      "tools": "Tools"
+    },
+    "process": {
+      "title": "So arbeiten wir",
+      "subtitle": "Tage bis zum ersten Ergebnis. Nicht Monate.",
+      "discover": "Entdecken",
+      "discoverDesc": "Ihr Business-Kontext und AI-Potenzial verstehen",
+      "architect": "Entwerfen",
+      "architectDesc": "Die AI-Systemarchitektur designen",
+      "build": "Bauen",
+      "buildDesc": "Funktionierende AI in Wochen liefern, nicht Monaten",
+      "scale": "Skalieren",
+      "scaleDesc": "Betreiben, überwachen, optimieren"
+    },
+    "cta": {
+      "videoTitle": "Unser Engineering in Aktion",
+      "videoSubtitle": "Vom Konzept zur Produktion in Wochen",
+      "enterpriseDesc": "Lassen Sie uns besprechen, wie AI Engineering Ihre Abläufe transformieren kann. Buchen Sie ein 30-minütiges Discovery-Gespräch."
+    }
+  },
+  "services": {
+    "meta": {
+      "title": "Services | Digital David",
+      "description": "High-End AI Engineering Beratung. Strategische AI-Beratung, Team-Aufbau, Methodologie-Frameworks, AI-Transformation und Enterprise-Grade AI-Implementierung."
+    },
+    "hero": {
+      "badge": "High-End AI-Beratung",
+      "title": "Strategische AI",
+      "titleHighlight": "Engineering Services",
+      "description": "Wir sind keine Generalisten. Wir sind spezialisierte AI Engineers, die Unternehmen helfen, die Komplexität der AI-Adoption und -Skalierung zu meistern."
+    },
+    "video": {
+      "ourApproach": "Unser Beratungsansatz",
+      "title": "AI-Beratung, die",
+      "titleHighlight": "Ergebnisse liefert",
+      "description": "Die meisten AI-Initiativen scheitern nicht an der Technologie, sondern an Strategie, Umsetzung und Change Management. Wir bringen die Engineering-Tiefe, um AI zum Laufen zu bringen, und die Beratungskompetenz, um sie nachhaltig zu verankern.",
+      "check1": "Strategie, die auf technischer Realität basiert",
+      "check2": "Hands-on Engineers, keine Slide-Deck-Berater",
+      "check3": "Wissenstransfer und Kompetenzaufbau",
+      "check4": "Langfristige Partnerschaft, kein Projekt-Karussell"
+    },
+    "services": {
+      "title": "Unsere Services",
+      "subtitle": "Umfassende AI-Beratungsservices für Enterprise-Komplexität.",
+      "deliverables": "Deliverables",
+      "strategyTitle": "AI-Strategieentwicklung",
+      "strategyTagline": "Von der Vision zur Wertschöpfung",
+      "strategyDesc": "Wir entwickeln unternehmensspezifische AI-Strategien, die auf Ihre Geschäftsziele abgestimmt sind. Wir helfen, eine klare AI-Vision zu formulieren, hochwertige Use Cases zu identifizieren und eine Roadmap zu erstellen, die messbare Ergebnisse liefert.",
+      "strategyD1": "AI-Vision und Potenzialanalyse",
+      "strategyD2": "Use-Case-Priorisierungsmatrix",
+      "strategyD3": "Business Case mit ROI-Projektionen",
+      "strategyD4": "Executive Readiness Workshop",
+      "roadmapTitle": "AI-Roadmaps & Planung",
+      "roadmapTagline": "Strukturierter Weg zur AI-Adoption",
+      "roadmapDesc": "Detaillierte Implementierungs-Roadmaps, die Use Cases priorisieren, Meilensteine definieren und Change Management einbeziehen. Wir stellen sicher, dass Ihre AI-Reise systematisch, erreichbar und auf die Organisationskapazität abgestimmt ist.",
+      "roadmapD1": "Phasenbasierter Implementierungsplan",
+      "roadmapD2": "Technologie-Stack-Empfehlungen",
+      "roadmapD3": "Ressourcen- und Skill-Gap-Analyse",
+      "roadmapD4": "Risikominderungsrahmen",
+      "transformTitle": "AI-Transformation",
+      "transformTagline": "Unternehmensweite AI-Integration",
+      "transformDesc": "Umfassende Unterstützung bei der organisationsweiten AI-Transformation. Wir bauen AI-Kompetenzen auf, schulen Teams und managen Veränderungen, damit AI ein integraler Bestandteil Ihrer Geschäftsprozesse wird.",
+      "transformD1": "AI Center of Excellence Aufbau",
+      "transformD2": "Betriebsmodell-Design",
+      "transformD3": "Skills-Framework und Training",
+      "transformD4": "Change-Management-Programm",
+      "teamTitle": "Team Ramp-Up",
+      "teamTagline": "AI-Kompetenz aufbauen",
+      "teamDesc": "Beschleunigen Sie Ihre internen AI-Fähigkeiten mit eingebetteten Experten, die Seite an Seite mit Ihrem Team arbeiten. Wissenstransfer, Hands-on-Coaching und praktische Kompetenzentwicklung.",
+      "teamD1": "Eingebettete AI Engineers",
+      "teamD2": "Pair Programming und Mentoring",
+      "teamD3": "Technische Architekturberatung",
+      "teamD4": "Best-Practices-Dokumentation",
+      "mlopsTitle": "MLOps & AI Operations",
+      "mlopsTagline": "Produktionsreife AI-Systeme",
+      "mlopsDesc": "Implementierung von MLOps Best Practices für produktive AI-Operationen. Wir automatisieren den ML-Lebenszyklus von der Datenvorbereitung über Training, Deployment bis zum kontinuierlichen Monitoring.",
+      "mlopsD1": "CI/CD-Pipelines für ML",
+      "mlopsD2": "Modell-Monitoring und Observability",
+      "mlopsD3": "Automatisierte Retraining-Workflows",
+      "mlopsD4": "Infrastruktur-Optimierung",
+      "governanceTitle": "AI Governance & Ethik",
+      "governanceTagline": "Verantwortungsvolle AI im Maßstab",
+      "governanceDesc": "Beratung zu verantwortungsvollem AI-Einsatz im Einklang mit Datenschutz, Regulierung und Ethik. Wir etablieren robuste AI-Governance-Strukturen, die Risiken minimieren und Vertrauen schaffen.",
+      "governanceD1": "AI-Governance-Framework",
+      "governanceD2": "Risikobewertungsmethodik",
+      "governanceD3": "Compliance-Dokumentation",
+      "governanceD4": "Bias-Erkennung und -Minderung"
+    },
+    "methodology": {
+      "title": "Unsere Methodik",
+      "subtitle": "Ein strukturierter Ansatz, der Rigorosität mit Agilität verbindet.",
+      "discoverTitle": "Entdecken",
+      "discoverDesc": "Deep Dive in Ihren Business-Kontext, aktuelle Fähigkeiten und AI-Potenzial.",
+      "discoverA1": "Stakeholder-Interviews",
+      "discoverA2": "Datenlandschaft-Assessment",
+      "discoverA3": "Opportunity Mapping",
+      "designTitle": "Designen",
+      "designDesc": "Lösung architektieren, Ansatz definieren und Erfolgskriterien abstimmen.",
+      "designA1": "Lösungsarchitektur",
+      "designA2": "Technologieauswahl",
+      "designA3": "Erfolgskriterien-Definition",
+      "deliverTitle": "Liefern",
+      "deliverDesc": "Iterative Implementierung mit kontinuierlicher Validierung und Stakeholder-Einbindung.",
+      "deliverA1": "Agile Sprints",
+      "deliverA2": "Stakeholder-Demos",
+      "deliverA3": "Qualitätssicherung",
+      "scaleTitle": "Skalieren",
+      "scaleDesc": "Operationalisieren, Wissen transferieren und kontinuierliche Verbesserung ermöglichen.",
+      "scaleA1": "Wissenstransfer",
+      "scaleA2": "Dokumentation",
+      "scaleA3": "Optimierungs-Roadmap"
+    },
+    "whyUs": {
+      "title": "Warum Digital David",
+      "subtitle": "Was unsere Beratung von traditionellen Firmen unterscheidet.",
+      "expertiseTitle": "Tiefe AI-Expertise",
+      "expertiseDesc": "Spezialisierte Engineers in ML, Data Engineering und modernen AI-Architekturen. Wir lösen komplexe Herausforderungen, die andere nicht können.",
+      "industryTitle": "Branchen-Know-how",
+      "industryDesc": "Fokussierte Expertise in HR Tech, Finance, Healthcare, Legal Tech und Pharma. Wir verstehen Ihre Domäne.",
+      "e2eTitle": "End-to-End-Fähigkeit",
+      "e2eDesc": "Von der Strategie über die Implementierung bis zum Betrieb. Ein Partner für Ihre gesamte AI-Reise.",
+      "boutiqueTitle": "Boutique-Ansatz",
+      "boutiqueDesc": "Ausgewählte Projekte mit höchster Sorgfalt. Direkter Zugang zu Senior-Experten, nicht zu Junior-Beratern."
+    },
+    "engagement": {
+      "title": "Engagement-Modelle",
+      "subtitle": "Flexible Zusammenarbeitsmodelle, abgestimmt auf Ihre Bedürfnisse.",
+      "advisoryTitle": "Advisory",
+      "advisoryDesc": "Strategische Beratung und Experten-Review. Ideal für Validierung, Zweitmeinungen und AI-Strategie auf Führungsebene.",
+      "advisoryType": "Retainer oder projektbasiert",
+      "embeddedTitle": "Embedded Teams",
+      "embeddedDesc": "Unsere Engineers arbeiten Seite an Seite mit Ihrem Team. Volle Integration, Wissenstransfer und Kompetenzaufbau.",
+      "embeddedType": "Am beliebtesten",
+      "managedTitle": "Managed Delivery",
+      "managedDesc": "End-to-End-Projektverantwortung. Wir übernehmen die volle Verantwortung für die Lieferung definierter Ergebnisse.",
+      "managedType": "Festpreis oder T&M"
+    },
+    "cta": {
+      "title": "Bereit, Ihre",
+      "titleHighlight": "AI-Kompetenz zu transformieren",
+      "subtitle": "Lassen Sie uns besprechen, wie unsere Beratungsservices Ihre AI-Reise beschleunigen können.",
+      "videoTitle": "Unsere Beratung in Aktion",
+      "videoSubtitle": "Wie wir Unternehmen bei der AI-Transformation geholfen haben",
+      "enterpriseDesc": "Buchen Sie ein Discovery-Gespräch, um Ihre AI-Herausforderungen zu besprechen und wie wir helfen können."
+    }
+  },
+  "karriererakete": {
+    "meta": {
+      "title": "Karriererakete | Digital David",
+      "description": "karriererakete.ai – Unsere AI-native Karriere-Community, die Mitte 2026 startet. Wo Talente ihren Tribe finden und AI jeden Schritt begleitet."
+    },
+    "hero": {
+      "subtitle": "Unser nächstes AI-Produkt: Die Karriere-Community",
+      "description": "AI-gesteuertes Karriere-Coaching trifft auf Community. Wo Talente ihren Tribe finden, Unternehmen authentische Verbindungen aufbauen und AI jeden Schritt begleitet."
+    },
+    "features": {
+      "coachTitle": "AI-Karriere-Coach",
+      "coachDesc": "Personalisierte Karriereberatung, Lebenslauf-Review, Interview-Vorbereitung und Lernempfehlungen.",
+      "communityTitle": "Community First",
+      "communityDesc": "Tribes basierend auf Skills und Interessen. Netzwerke mit Gleichgesinnten, finde Mentoren, wachse gemeinsam.",
+      "ambassadorsTitle": "Unternehmens-Botschafter",
+      "ambassadorsDesc": "Echte Mitarbeiter, keine Recruiter. Authentische Verbindungen mit tatsächlichen Teammitgliedern.",
+      "gamifiedTitle": "Gamifiziertes Wachstum",
+      "gamifiedDesc": "Rocket Points für Engagement. 7 Karriere-Level von Starter bis Rocket Star.",
+      "matchingTitle": "Smart Matching",
+      "matchingDesc": "92% Genauigkeit beim AI-Matching. Intelligentes Fit-Scoring zwischen Talenten und Unternehmen.",
+      "learningTitle": "Lernen & Mentoring",
+      "learningDesc": "Strukturierte Programme, virtuelle Projekte und 1:1-Mentoring-Matching."
+    },
+    "foundation": {
+      "title": "Aufgebaut auf bewährtem Fundament",
+      "description": "karriererakete.ai kombiniert die 14+ Jahre Talent-Expertise von Talentschmiede mit den AI-Engineering-Fähigkeiten von Digital David.",
+      "talentsPlaced": "Platzierte Talente",
+      "retentionRate": "Verbleibquote",
+      "trainingPerTalent": "Training pro Talent"
+    }
+  },
+  "products": {
+    "meta": {
+      "title": "Produkte | Digital David",
+      "description": "Unsere AI-Produkte: Talenty.ai, Talky, DocuGuard.ai, Factify.ai, Factify Pharma Suite, Factify Finance Suite. Produktionsreife AI-Plattformen, die heute Kunden bedienen."
+    },
+    "hero": {
+      "title": "Unsere AI-Produkte",
+      "description": "Wir beraten nicht nur – wir bauen und liefern. Diese Produkte bedienen heute Kunden und beweisen unsere Engineering-Kompetenz."
+    },
+    "video": {
+      "seeProducts": "Unsere Produkte in Aktion sehen",
+      "title": "AI, die",
+      "titleHighlight": "Ergebnisse liefert",
+      "description": "Jedes Produkt in unserem Portfolio begann als echte Business-Herausforderung. Wir haben diese Lösungen gebaut, in die Produktion gebracht und verbessern sie kontinuierlich basierend auf echtem Nutzerfeedback. Das ist AI, die heute funktioniert.",
+      "battleTested": "Kampferprobt",
+      "battleTestedDesc": "Produktionssysteme, die echten Kunden mit echten Daten dienen.",
+      "enterpriseGrade": "Enterprise Grade",
+      "enterpriseGradeDesc": "Sicherheit, Compliance und Skalierbarkeit von Tag eins an eingebaut.",
+      "provenRoi": "Bewiesener ROI",
+      "provenRoiDesc": "Messbarer Impact auf Effizienz, Qualität und Kostenreduzierung."
+    },
+    "comingSoon": {
+      "subtitle": "Unser nächstes AI-Produkt: Die Karriere-Community",
+      "description": "AI-gesteuertes Karriere-Coaching trifft auf Community. Wo Talente ihren Tribe finden, Unternehmen authentische Verbindungen aufbauen und AI jeden Schritt begleitet."
+    },
+    "cta": {
+      "videoTitle": "Unsere Produkte in Aktion",
+      "videoSubtitle": "Echte AI löst echte Probleme",
+      "enterpriseDesc": "Lassen Sie uns besprechen, wie unsere Produkte Ihre Abläufe transformieren können. Buchen Sie ein 30-minütiges Discovery-Gespräch."
+    }
+  }
+}

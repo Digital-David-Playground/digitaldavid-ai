@@ -1,11 +1,15 @@
-import { Metadata } from "next";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { FadeInUp } from "@/components/animations/FadeInUp";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Digital David",
-  description: "Privacy Policy and Data Protection Information for Digital David AG",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "Privacy Policy | Digital David",
+    description: "Privacy Policy and Data Protection Information for Digital David AG",
+    alternates: getAlternates("/legal/privacy", locale),
+  };
+}
 
 export default function PrivacyPage() {
   return (

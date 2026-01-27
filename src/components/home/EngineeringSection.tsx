@@ -1,44 +1,45 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StaggerChildren, StaggerItem } from "@/components/animations/FadeInUp";
 import { Cpu, Box, ArrowUpRight } from "lucide-react";
 
-const pillars = [
-  {
-    icon: Cpu,
-    title: "Agentic Systems",
-    description:
-      "Multi-agent orchestration for enterprise. We build autonomous AI systems that reason, plan, and execute complex workflows.",
-    href: "/engineering",
-    cta: "Learn More",
-  },
-  {
-    icon: Box,
-    title: "AI Products",
-    description:
-      "Production-ready AI platforms. From recruiting automation to document intelligence - we ship AI that works.",
-    href: "/products",
-    cta: "Explore",
-  },
-  {
-    icon: ArrowUpRight,
-    title: "AI Transformation",
-    description:
-      "Strategy to scale operations. We guide enterprises from AI experimentation to production deployment.",
-    href: "/contact",
-    cta: "Talk to Us",
-  },
-];
-
 export function EngineeringSection() {
+  const t = useTranslations("home.engineering");
+  const tc = useTranslations("common.cta");
+
+  const pillars = [
+    {
+      icon: Cpu,
+      title: t("agenticTitle"),
+      description: t("agenticDesc"),
+      href: "/engineering",
+      cta: tc("learnMore"),
+    },
+    {
+      icon: Box,
+      title: t("productsTitle"),
+      description: t("productsDesc"),
+      href: "/products",
+      cta: tc("explore"),
+    },
+    {
+      icon: ArrowUpRight,
+      title: t("transformTitle"),
+      description: t("transformDesc"),
+      href: "/contact",
+      cta: tc("talkToUs"),
+    },
+  ];
+
   return (
     <Section>
       <SectionHeader
-        title="What We Engineer"
-        subtitle="Three pillars of our work. Clean, focused, production-obsessed."
+        title={t("title")}
+        subtitle={t("subtitle")}
         centered
       />
 

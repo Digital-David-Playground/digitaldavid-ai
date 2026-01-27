@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -28,156 +29,174 @@ import {
   Layers,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Services | Digital David",
-  description:
-    "High-end AI engineering consultancy. Strategic AI consulting, team ramp-up, methodology frameworks, AI transformation, and enterprise-grade AI implementation.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "services.meta" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: getAlternates("/services", locale),
+  };
+}
 
-const services = [
-  {
-    id: "strategy",
-    icon: Compass,
-    title: "AI Strategy Development",
-    tagline: "From vision to value creation",
-    description:
-      "We develop enterprise-specific AI strategies aligned with your business goals. We help formulate a clear AI vision, identify high-impact use cases, and create a roadmap that delivers measurable results.",
-    deliverables: [
-      "AI vision and opportunity assessment",
-      "Use case prioritization matrix",
-      "Business case with ROI projections",
-      "Executive readiness workshop",
-    ],
-    gradient: "from-electric-blue to-cyan",
-  },
-  {
-    id: "roadmap",
-    icon: Route,
-    title: "AI Roadmaps & Planning",
-    tagline: "Structured path to AI adoption",
-    description:
-      "Detailed implementation roadmaps that prioritize use cases, define milestones, and incorporate change management. We ensure your AI journey is systematic, achievable, and aligned with organizational capacity.",
-    deliverables: [
-      "Phased implementation plan",
-      "Technology stack recommendations",
-      "Resource and skill gap analysis",
-      "Risk mitigation framework",
-    ],
-    gradient: "from-purple to-electric-blue",
-  },
-  {
-    id: "transformation",
-    icon: Sparkles,
-    title: "AI Transformation",
-    tagline: "Enterprise-wide AI integration",
-    description:
-      "Comprehensive support for organization-wide AI transformation. We build AI competencies, train teams, and manage change so AI becomes an integral part of your business processes.",
-    deliverables: [
-      "AI Center of Excellence setup",
-      "Operating model design",
-      "Skills framework and training",
-      "Change management program",
-    ],
-    gradient: "from-cyan to-emerald",
-  },
-  {
-    id: "team-ramp",
-    icon: Users,
-    title: "Team Ramp-Up",
-    tagline: "Build your AI capability",
-    description:
-      "Accelerate your internal AI capabilities with embedded experts who work alongside your team. Knowledge transfer, hands-on coaching, and practical skills development.",
-    deliverables: [
-      "Embedded AI engineers",
-      "Pair programming and mentoring",
-      "Technical architecture guidance",
-      "Best practices documentation",
-    ],
-    gradient: "from-emerald to-cyan",
-  },
-  {
-    id: "mlops",
-    icon: Workflow,
-    title: "MLOps & AI Operations",
-    tagline: "Production-grade AI systems",
-    description:
-      "Implement MLOps best practices for productive AI operations. We automate the ML lifecycle from data preparation through training, deployment, and continuous monitoring.",
-    deliverables: [
-      "CI/CD pipelines for ML",
-      "Model monitoring and observability",
-      "Automated retraining workflows",
-      "Infrastructure optimization",
-    ],
-    gradient: "from-electric-blue to-purple",
-  },
-  {
-    id: "governance",
-    icon: Shield,
-    title: "AI Governance & Ethics",
-    tagline: "Responsible AI at scale",
-    description:
-      "Advisory on responsible AI deployment aligned with data privacy, regulation, and ethics. We establish robust AI governance structures that minimize risk and build trust.",
-    deliverables: [
-      "AI governance framework",
-      "Risk assessment methodology",
-      "Compliance documentation",
-      "Bias detection and mitigation",
-    ],
-    gradient: "from-purple to-cyan",
-  },
-];
+export default async function ServicesPage() {
+  const t = await getTranslations("services");
+  const tCommon = await getTranslations("common.cta");
+  const tHomeCta = await getTranslations("home.cta");
 
-const methodology = [
-  {
-    phase: "01",
-    title: "Discover",
-    description: "Deep dive into your business context, current capabilities, and AI potential.",
-    activities: ["Stakeholder interviews", "Data landscape assessment", "Opportunity mapping"],
-  },
-  {
-    phase: "02",
-    title: "Design",
-    description: "Architect the solution, define the approach, and align on success metrics.",
-    activities: ["Solution architecture", "Technology selection", "Success metrics definition"],
-  },
-  {
-    phase: "03",
-    title: "Deliver",
-    description: "Iterative implementation with continuous validation and stakeholder engagement.",
-    activities: ["Agile sprints", "Stakeholder demos", "Quality assurance"],
-  },
-  {
-    phase: "04",
-    title: "Scale",
-    description: "Operationalize, transfer knowledge, and enable continuous improvement.",
-    activities: ["Knowledge transfer", "Documentation", "Optimization roadmap"],
-  },
-];
+  const services = [
+    {
+      id: "strategy",
+      icon: Compass,
+      title: t("services.strategyTitle"),
+      tagline: t("services.strategyTagline"),
+      description: t("services.strategyDesc"),
+      deliverables: [
+        t("services.strategyD1"),
+        t("services.strategyD2"),
+        t("services.strategyD3"),
+        t("services.strategyD4"),
+      ],
+      gradient: "from-electric-blue to-cyan",
+    },
+    {
+      id: "roadmap",
+      icon: Route,
+      title: t("services.roadmapTitle"),
+      tagline: t("services.roadmapTagline"),
+      description: t("services.roadmapDesc"),
+      deliverables: [
+        t("services.roadmapD1"),
+        t("services.roadmapD2"),
+        t("services.roadmapD3"),
+        t("services.roadmapD4"),
+      ],
+      gradient: "from-purple to-electric-blue",
+    },
+    {
+      id: "transformation",
+      icon: Sparkles,
+      title: t("services.transformTitle"),
+      tagline: t("services.transformTagline"),
+      description: t("services.transformDesc"),
+      deliverables: [
+        t("services.transformD1"),
+        t("services.transformD2"),
+        t("services.transformD3"),
+        t("services.transformD4"),
+      ],
+      gradient: "from-cyan to-emerald",
+    },
+    {
+      id: "team-ramp",
+      icon: Users,
+      title: t("services.teamTitle"),
+      tagline: t("services.teamTagline"),
+      description: t("services.teamDesc"),
+      deliverables: [
+        t("services.teamD1"),
+        t("services.teamD2"),
+        t("services.teamD3"),
+        t("services.teamD4"),
+      ],
+      gradient: "from-emerald to-cyan",
+    },
+    {
+      id: "mlops",
+      icon: Workflow,
+      title: t("services.mlopsTitle"),
+      tagline: t("services.mlopsTagline"),
+      description: t("services.mlopsDesc"),
+      deliverables: [
+        t("services.mlopsD1"),
+        t("services.mlopsD2"),
+        t("services.mlopsD3"),
+        t("services.mlopsD4"),
+      ],
+      gradient: "from-electric-blue to-purple",
+    },
+    {
+      id: "governance",
+      icon: Shield,
+      title: t("services.governanceTitle"),
+      tagline: t("services.governanceTagline"),
+      description: t("services.governanceDesc"),
+      deliverables: [
+        t("services.governanceD1"),
+        t("services.governanceD2"),
+        t("services.governanceD3"),
+        t("services.governanceD4"),
+      ],
+      gradient: "from-purple to-cyan",
+    },
+  ];
 
-const differentiators = [
-  {
-    icon: Brain,
-    title: "Deep AI Expertise",
-    description: "Specialized engineers in ML, data engineering, and modern AI architectures. We solve complex challenges others can't.",
-  },
-  {
-    icon: Target,
-    title: "Industry Know-How",
-    description: "Focused expertise in HR Tech, Finance, Healthcare, Legal Tech, and Pharma. We understand your domain.",
-  },
-  {
-    icon: Layers,
-    title: "End-to-End Capability",
-    description: "From strategy through implementation to operations. One partner for your entire AI journey.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Boutique Approach",
-    description: "Selected projects with highest care. Direct access to senior experts, not junior consultants.",
-  },
-];
+  const methodology = [
+    {
+      phase: "01",
+      title: t("methodology.discoverTitle"),
+      description: t("methodology.discoverDesc"),
+      activities: [
+        t("methodology.discoverA1"),
+        t("methodology.discoverA2"),
+        t("methodology.discoverA3"),
+      ],
+    },
+    {
+      phase: "02",
+      title: t("methodology.designTitle"),
+      description: t("methodology.designDesc"),
+      activities: [
+        t("methodology.designA1"),
+        t("methodology.designA2"),
+        t("methodology.designA3"),
+      ],
+    },
+    {
+      phase: "03",
+      title: t("methodology.deliverTitle"),
+      description: t("methodology.deliverDesc"),
+      activities: [
+        t("methodology.deliverA1"),
+        t("methodology.deliverA2"),
+        t("methodology.deliverA3"),
+      ],
+    },
+    {
+      phase: "04",
+      title: t("methodology.scaleTitle"),
+      description: t("methodology.scaleDesc"),
+      activities: [
+        t("methodology.scaleA1"),
+        t("methodology.scaleA2"),
+        t("methodology.scaleA3"),
+      ],
+    },
+  ];
 
-export default function ServicesPage() {
+  const differentiators = [
+    {
+      icon: Brain,
+      title: t("whyUs.expertiseTitle"),
+      description: t("whyUs.expertiseDesc"),
+    },
+    {
+      icon: Target,
+      title: t("whyUs.industryTitle"),
+      description: t("whyUs.industryDesc"),
+    },
+    {
+      icon: Layers,
+      title: t("whyUs.e2eTitle"),
+      description: t("whyUs.e2eDesc"),
+    },
+    {
+      icon: GraduationCap,
+      title: t("whyUs.boutiqueTitle"),
+      description: t("whyUs.boutiqueDesc"),
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -185,20 +204,19 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInUp>
             <Badge variant="info" className="mb-6">
-              High-End AI Consultancy
+              {t("hero.badge")}
             </Badge>
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Strategic AI
+              {t("hero.title")}
               <br />
-              <span className="gradient-text">Engineering Services</span>
+              <span className="gradient-text">{t("hero.titleHighlight")}</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-400 max-w-2xl">
-              We&apos;re not generalists. We&apos;re specialized AI engineers who help
-              enterprises navigate the complexity of AI adoption and scale.
+              {t("hero.description")}
             </p>
           </FadeInUp>
         </div>
@@ -219,7 +237,7 @@ export default function ServicesPage() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-electric-blue to-cyan flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-electric-blue/30">
                     <Play size={32} className="text-white ml-1" />
                   </div>
-                  <p className="text-gray-400 text-sm">Our consulting approach</p>
+                  <p className="text-gray-400 text-sm">{t("video.ourApproach")}</p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -230,31 +248,29 @@ export default function ServicesPage() {
           <FadeInUp delay={0.2}>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                AI Consulting <span className="gradient-text">That Delivers</span>
+                {t("video.title")} <span className="gradient-text">{t("video.titleHighlight")}</span>
               </h2>
 
               <p className="text-gray-400 mb-8">
-                Most AI initiatives fail not because of technology, but because of
-                strategy, execution, and change management. We bring the engineering
-                depth to make AI work and the consulting expertise to make it stick.
+                {t("video.description")}
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <CheckCircle className="text-electric-blue shrink-0" size={20} />
-                  <span className="text-gray-300">Strategy grounded in technical reality</span>
+                  <span className="text-gray-300">{t("video.check1")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="text-electric-blue shrink-0" size={20} />
-                  <span className="text-gray-300">Hands-on engineers, not slide deck consultants</span>
+                  <span className="text-gray-300">{t("video.check2")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="text-electric-blue shrink-0" size={20} />
-                  <span className="text-gray-300">Knowledge transfer and capability building</span>
+                  <span className="text-gray-300">{t("video.check3")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className="text-electric-blue shrink-0" size={20} />
-                  <span className="text-gray-300">Long-term partnership, not project churn</span>
+                  <span className="text-gray-300">{t("video.check4")}</span>
                 </div>
               </div>
             </div>
@@ -265,8 +281,8 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <Section variant="dark">
         <SectionHeader
-          title="Our Services"
-          subtitle="Comprehensive AI consulting services designed for enterprise complexity."
+          title={t("services.title")}
+          subtitle={t("services.subtitle")}
           centered
         />
 
@@ -285,7 +301,7 @@ export default function ServicesPage() {
                     {service.description}
                   </CardDescription>
                   <div className="pt-4 border-t border-slate-light/10">
-                    <p className="text-gray-500 text-xs uppercase tracking-wide mb-2">Deliverables</p>
+                    <p className="text-gray-500 text-xs uppercase tracking-wide mb-2">{t("services.deliverables")}</p>
                     <ul className="space-y-1">
                       {service.deliverables.map((item, i) => (
                         <li key={i} className="text-gray-400 text-sm flex items-start gap-2">
@@ -305,8 +321,8 @@ export default function ServicesPage() {
       {/* Methodology */}
       <Section>
         <SectionHeader
-          title="Our Methodology"
-          subtitle="A structured approach that balances rigor with agility."
+          title={t("methodology.title")}
+          subtitle={t("methodology.subtitle")}
           centered
         />
 
@@ -340,8 +356,8 @@ export default function ServicesPage() {
       {/* Why Us */}
       <Section variant="dark">
         <SectionHeader
-          title="Why Digital David"
-          subtitle="What sets our consulting apart from traditional firms."
+          title={t("whyUs.title")}
+          subtitle={t("whyUs.subtitle")}
           centered
         />
 
@@ -370,8 +386,8 @@ export default function ServicesPage() {
       {/* Engagement Models */}
       <Section>
         <SectionHeader
-          title="Engagement Models"
-          subtitle="Flexible ways to work together based on your needs."
+          title={t("engagement.title")}
+          subtitle={t("engagement.subtitle")}
           centered
         />
 
@@ -381,11 +397,11 @@ export default function ServicesPage() {
               <div className="w-12 h-12 rounded-xl bg-electric-blue/10 flex items-center justify-center mx-auto mb-4">
                 <FileCheck className="text-electric-blue" size={24} />
               </div>
-              <CardTitle className="mb-3">Advisory</CardTitle>
+              <CardTitle className="mb-3">{t("engagement.advisoryTitle")}</CardTitle>
               <CardDescription>
-                Strategic guidance and expert review. Ideal for validation, second opinions, and executive-level AI strategy.
+                {t("engagement.advisoryDesc")}
               </CardDescription>
-              <p className="text-gray-500 text-sm mt-4">Retainer or project-based</p>
+              <p className="text-gray-500 text-sm mt-4">{t("engagement.advisoryType")}</p>
             </Card>
           </StaggerItem>
 
@@ -394,11 +410,11 @@ export default function ServicesPage() {
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
                 <Users className="text-white" size={24} />
               </div>
-              <CardTitle className="mb-3">Embedded Teams</CardTitle>
+              <CardTitle className="mb-3">{t("engagement.embeddedTitle")}</CardTitle>
               <CardDescription>
-                Our engineers work alongside your team. Full integration, knowledge transfer, and capability building.
+                {t("engagement.embeddedDesc")}
               </CardDescription>
-              <p className="text-electric-blue text-sm mt-4">Most popular</p>
+              <p className="text-electric-blue text-sm mt-4">{t("engagement.embeddedType")}</p>
             </Card>
           </StaggerItem>
 
@@ -407,11 +423,11 @@ export default function ServicesPage() {
               <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center mx-auto mb-4">
                 <Settings2 className="text-purple" size={24} />
               </div>
-              <CardTitle className="mb-3">Managed Delivery</CardTitle>
+              <CardTitle className="mb-3">{t("engagement.managedTitle")}</CardTitle>
               <CardDescription>
-                End-to-end project ownership. We take full responsibility for delivering defined outcomes.
+                {t("engagement.managedDesc")}
               </CardDescription>
-              <p className="text-gray-500 text-sm mt-4">Fixed scope or T&M</p>
+              <p className="text-gray-500 text-sm mt-4">{t("engagement.managedType")}</p>
             </Card>
           </StaggerItem>
         </StaggerChildren>
@@ -426,15 +442,15 @@ export default function ServicesPage() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate/50 border border-slate-light/20 rounded-full mb-6">
                 <MessageCircle size={16} className="text-electric-blue" />
-                <span className="text-sm text-gray-300">We build AI, but we talk human to human</span>
+                <span className="text-sm text-gray-300">{tHomeCta("badge")}</span>
               </div>
 
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Ready to Transform <span className="gradient-text">Your AI Capability</span>?
+                {t("cta.title")} <span className="gradient-text">{t("cta.titleHighlight")}</span>?
               </h2>
 
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Let&apos;s discuss how our consulting services can accelerate your AI journey.
+                {t("cta.subtitle")}
               </p>
             </div>
           </FadeInUp>
@@ -453,10 +469,10 @@ export default function ServicesPage() {
                       <Play size={32} className="text-white ml-1" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      See Our Consulting in Action
+                      {t("cta.videoTitle")}
                     </h3>
                     <p className="text-gray-400 text-sm md:text-base">
-                      How we helped enterprises transform with AI
+                      {t("cta.videoSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -473,12 +489,12 @@ export default function ServicesPage() {
                     <Building2 className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Enterprises</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("enterpriseTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Book a discovery call to discuss your AI challenges and how we can help.
+                  {t("cta.enterpriseDesc")}
                 </CardDescription>
                 <Button href="/contact" variant="primary" className="w-full">
-                  Book a Discovery Call
+                  {tCommon("bookCall")}
                 </Button>
               </Card>
             </StaggerItem>
@@ -490,9 +506,9 @@ export default function ServicesPage() {
                     <Users className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Talents</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("talentTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Join the AI engineering revolution. Explore opportunities with karriererakete.ai.
+                  {tHomeCta("talentDesc")}
                 </CardDescription>
                 <Button href="https://talentschmiede-ai.vercel.app/karriererakete" variant="secondary" className="w-full">
                   karriererakete.ai
@@ -503,7 +519,7 @@ export default function ServicesPage() {
 
           <FadeInUp delay={0.4}>
             <p className="text-center text-gray-500 text-sm mt-12">
-              No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+              {tHomeCta("bottomTagline")}
             </p>
           </FadeInUp>
         </div>

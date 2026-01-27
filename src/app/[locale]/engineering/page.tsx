@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -26,113 +27,115 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "AI Engineering | Digital David",
-  description:
-    "We architect, build, and deploy AI systems. Agentic AI, LLM engineering, conversational AI, and document intelligence.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "engineering.meta" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: getAlternates("/engineering", locale),
+  };
+}
 
-const competencies = [
-  {
-    icon: Cpu,
-    title: "Agentic AI Systems",
-    description:
-      "Multi-agent orchestration, agent control planes, MCP integration, and workflow automation for enterprise.",
-    skills: [
-      "Multi-agent orchestration",
-      "Agent control planes",
-      "MCP integration",
-      "Workflow automation",
-    ],
-  },
-  {
-    icon: Layers,
-    title: "LLM Engineering",
-    description:
-      "RAG systems, fine-tuning, prompt engineering, model selection, and vector database integration.",
-    skills: [
-      "RAG systems",
-      "Fine-tuning",
-      "Prompt engineering",
-      "LangChain / LlamaIndex",
-      "Vector databases",
-    ],
-  },
-  {
-    icon: MessageSquare,
-    title: "Conversational AI",
-    description:
-      "Voice agents, chat systems, multi-channel deployment, and 50+ language support.",
-    skills: [
-      "Voice agents",
-      "Chat systems",
-      "Multi-channel",
-      "50+ languages",
-    ],
-  },
-  {
-    icon: FileSearch,
-    title: "Document Intelligence",
-    description:
-      "Classification, entity extraction, compliance automation, and OCR processing.",
-    skills: [
-      "Classification",
-      "Entity extraction",
-      "Compliance",
-      "OCR/processing",
-    ],
-  },
-  {
-    icon: Workflow,
-    title: "AI Product Development",
-    description:
-      "Full-stack AI products, white-label solutions, and platform architecture.",
-    skills: [
-      "Full-stack AI products",
-      "White-label solutions",
-      "Platform architecture",
-    ],
-  },
-  {
-    icon: ArrowRight,
-    title: "AI Transformation",
-    description:
-      "Strategy development, roadmapping, team training, governance, and scale operations.",
-    skills: ["Strategy", "Roadmapping", "Training", "Governance", "Scale ops"],
-  },
-];
+export default async function EngineeringPage() {
+  const t = await getTranslations("engineering");
+  const tCommon = await getTranslations("common.cta");
+  const tHomeCta = await getTranslations("home.cta");
 
-const techStack = {
-  models: ["Azure OpenAI", "GPT-4/5", "Claude", "Mistral"],
-  frameworks: ["LangChain", "LlamaIndex", "Semantic Kernel"],
-  infra: ["Azure", "Vercel", "AWS", "Pinecone", "Weaviate"],
-  tools: ["GitHub", "MLflow", "DevOps", "MCP"],
-};
+  const competencies = [
+    {
+      icon: Cpu,
+      title: t("competencies.agenticTitle"),
+      description: t("competencies.agenticDesc"),
+      skills: [
+        "Multi-agent orchestration",
+        "Agent control planes",
+        "MCP integration",
+        "Workflow automation",
+      ],
+    },
+    {
+      icon: Layers,
+      title: t("competencies.llmTitle"),
+      description: t("competencies.llmDesc"),
+      skills: [
+        "RAG systems",
+        "Fine-tuning",
+        "Prompt engineering",
+        "LangChain / LlamaIndex",
+        "Vector databases",
+      ],
+    },
+    {
+      icon: MessageSquare,
+      title: t("competencies.conversationalTitle"),
+      description: t("competencies.conversationalDesc"),
+      skills: [
+        "Voice agents",
+        "Chat systems",
+        "Multi-channel",
+        "50+ languages",
+      ],
+    },
+    {
+      icon: FileSearch,
+      title: t("competencies.documentTitle"),
+      description: t("competencies.documentDesc"),
+      skills: [
+        "Classification",
+        "Entity extraction",
+        "Compliance",
+        "OCR/processing",
+      ],
+    },
+    {
+      icon: Workflow,
+      title: t("competencies.productTitle"),
+      description: t("competencies.productDesc"),
+      skills: [
+        "Full-stack AI products",
+        "White-label solutions",
+        "Platform architecture",
+      ],
+    },
+    {
+      icon: ArrowRight,
+      title: t("competencies.transformTitle"),
+      description: t("competencies.transformDesc"),
+      skills: ["Strategy", "Roadmapping", "Training", "Governance", "Scale ops"],
+    },
+  ];
 
-const process = [
-  {
-    step: "01",
-    title: "Discover",
-    description: "Understand your business context and AI potential",
-  },
-  {
-    step: "02",
-    title: "Architect",
-    description: "Design the AI system architecture",
-  },
-  {
-    step: "03",
-    title: "Build",
-    description: "Ship working AI in weeks, not months",
-  },
-  {
-    step: "04",
-    title: "Scale",
-    description: "Operate, monitor, optimize",
-  },
-];
+  const techStack = {
+    [t("techStack.models")]: ["Azure OpenAI", "GPT-4/5", "Claude", "Mistral"],
+    [t("techStack.frameworks")]: ["LangChain", "LlamaIndex", "Semantic Kernel"],
+    [t("techStack.infra")]: ["Azure", "Vercel", "AWS", "Pinecone", "Weaviate"],
+    [t("techStack.tools")]: ["GitHub", "MLflow", "DevOps", "MCP"],
+  };
 
-export default function EngineeringPage() {
+  const processSteps = [
+    {
+      step: "01",
+      title: t("process.discover"),
+      description: t("process.discoverDesc"),
+    },
+    {
+      step: "02",
+      title: t("process.architect"),
+      description: t("process.architectDesc"),
+    },
+    {
+      step: "03",
+      title: t("process.build"),
+      description: t("process.buildDesc"),
+    },
+    {
+      step: "04",
+      title: t("process.scale"),
+      description: t("process.scaleDesc"),
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -140,20 +143,19 @@ export default function EngineeringPage() {
         <div className="max-w-7xl mx-auto px-6">
           <FadeInUp>
             <Badge variant="info" className="mb-6">
-              AI Engineering
+              {t("hero.badge")}
             </Badge>
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              AI Engineering
+              {t("hero.title")}
               <br />
-              <span className="gradient-text">for the Agentic Era</span>
+              <span className="gradient-text">{t("hero.titleHighlight")}</span>
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-400 max-w-2xl">
-              We don&apos;t advise. We architect, build, and deploy. Production AI
-              systems that work from day one.
+              {t("hero.description")}
             </p>
           </FadeInUp>
         </div>
@@ -177,7 +179,7 @@ export default function EngineeringPage() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-electric-blue to-cyan flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-electric-blue/30">
                     <Play size={32} className="text-white ml-1" />
                   </div>
-                  <p className="text-gray-400 text-sm">Watch how we work</p>
+                  <p className="text-gray-400 text-sm">{t("video.watchHow")}</p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -188,13 +190,11 @@ export default function EngineeringPage() {
           <FadeInUp delay={0.2}>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Engineering AI That <span className="gradient-text">Actually Works</span>
+                {t("video.title")} <span className="gradient-text">{t("video.titleHighlight")}</span>
               </h2>
 
               <p className="text-gray-400 mb-8">
-                We&apos;re not consultants who hand over slide decks. We&apos;re engineers who
-                build production AI systems. From multi-agent orchestration to document
-                intelligence, we ship working solutions in weeks, not months.
+                {t("video.description")}
               </p>
 
               <div className="space-y-4">
@@ -203,8 +203,8 @@ export default function EngineeringPage() {
                     <Zap className="text-electric-blue" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Ship Fast</h3>
-                    <p className="text-gray-400 text-sm">Days to first value. Working prototypes, not PowerPoints.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.shipFastTitle")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.shipFastDesc")}</p>
                   </div>
                 </div>
 
@@ -213,8 +213,8 @@ export default function EngineeringPage() {
                     <Shield className="text-purple" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Production Ready</h3>
-                    <p className="text-gray-400 text-sm">Enterprise-grade security, scalability, and reliability built in.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.productionTitle")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.productionDesc")}</p>
                   </div>
                 </div>
 
@@ -223,8 +223,8 @@ export default function EngineeringPage() {
                     <Code2 className="text-cyan" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Full Ownership</h3>
-                    <p className="text-gray-400 text-sm">Your code, your IP, your infrastructure. No vendor lock-in.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.ownershipTitle")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.ownershipDesc")}</p>
                   </div>
                 </div>
               </div>
@@ -236,8 +236,8 @@ export default function EngineeringPage() {
       {/* Competencies */}
       <Section>
         <SectionHeader
-          title="Our Competencies"
-          subtitle="Deep expertise in the technologies that matter for 2026 and beyond."
+          title={t("competencies.title")}
+          subtitle={t("competencies.subtitle")}
           centered
         />
 
@@ -276,7 +276,7 @@ export default function EngineeringPage() {
 
       {/* Tech Stack */}
       <Section variant="dark">
-        <SectionHeader title="Our Tech Stack" centered />
+        <SectionHeader title={t("techStack.title")} centered />
 
         <FadeInUp>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -301,13 +301,13 @@ export default function EngineeringPage() {
       {/* Process */}
       <Section>
         <SectionHeader
-          title="How We Work"
-          subtitle="Days to first value. Not months."
+          title={t("process.title")}
+          subtitle={t("process.subtitle")}
           centered
         />
 
         <StaggerChildren className="grid md:grid-cols-4 gap-6">
-          {process.map((step, index) => (
+          {processSteps.map((step, index) => (
             <StaggerItem key={index}>
               <div className="text-center">
                 <div className="text-5xl font-bold text-slate-light mb-4">
@@ -335,15 +335,15 @@ export default function EngineeringPage() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate/50 border border-slate-light/20 rounded-full mb-6">
                 <MessageCircle size={16} className="text-electric-blue" />
-                <span className="text-sm text-gray-300">We build AI, but we talk human to human</span>
+                <span className="text-sm text-gray-300">{tHomeCta("badge")}</span>
               </div>
 
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Ready to Build the <span className="gradient-text">Future</span>?
+                {tHomeCta("title")} <span className="gradient-text">{tHomeCta("titleHighlight")}</span>?
               </h2>
 
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Behind every AI solution is a conversation. Let&apos;s start yours.
+                {tHomeCta("subtitle")}
               </p>
             </div>
           </FadeInUp>
@@ -366,10 +366,10 @@ export default function EngineeringPage() {
                       <Play size={32} className="text-white ml-1" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      See Our Engineering in Action
+                      {t("cta.videoTitle")}
                     </h3>
                     <p className="text-gray-400 text-sm md:text-base">
-                      From concept to production in weeks
+                      {t("cta.videoSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -387,12 +387,12 @@ export default function EngineeringPage() {
                     <Building2 className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Enterprises</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("enterpriseTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Let&apos;s discuss how AI engineering can transform your operations. Book a 30-minute discovery call.
+                  {t("cta.enterpriseDesc")}
                 </CardDescription>
                 <Button href="/contact" variant="primary" className="w-full">
-                  Book a Discovery Call
+                  {tCommon("bookCall")}
                 </Button>
               </Card>
             </StaggerItem>
@@ -404,9 +404,9 @@ export default function EngineeringPage() {
                     <Users className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Talents</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("talentTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Join the AI engineering revolution. Explore opportunities with karriererakete.ai.
+                  {tHomeCta("talentDesc")}
                 </CardDescription>
                 <Button href="https://talentschmiede-ai.vercel.app/karriererakete" variant="secondary" className="w-full">
                   karriererakete.ai
@@ -418,7 +418,7 @@ export default function EngineeringPage() {
           {/* Bottom tagline */}
           <FadeInUp delay={0.4}>
             <p className="text-center text-gray-500 text-sm mt-12">
-              No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+              {tHomeCta("bottomTagline")}
             </p>
           </FadeInUp>
         </div>

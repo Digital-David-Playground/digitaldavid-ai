@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-
-const inquiryTypes = [
-  { value: "discovery", label: "Discovery Call" },
-  { value: "project", label: "Project Inquiry" },
-  { value: "partnership", label: "Partnership" },
-  { value: "other", label: "Other" },
-];
 
 interface FormData {
   name: string;
@@ -26,6 +20,15 @@ interface FormStatus {
 }
 
 export function ContactForm() {
+  const t = useTranslations("contact.form");
+
+  const inquiryTypes = [
+    { value: "discovery", label: t("discoveryCall") },
+    { value: "project", label: t("projectInquiry") },
+    { value: "partnership", label: t("partnership") },
+    { value: "other", label: t("other") },
+  ];
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -60,7 +63,7 @@ export function ContactForm() {
 
       setStatus({
         type: "success",
-        message: "Message sent! We'll get back to you within 24 hours.",
+        message: t("successMessage"),
       });
       setFormData({
         name: "",
@@ -72,7 +75,7 @@ export function ContactForm() {
     } catch {
       setStatus({
         type: "error",
-        message: "Something went wrong. Please try again or email us directly.",
+        message: t("errorMessage"),
       });
     }
   };
@@ -93,13 +96,13 @@ export function ContactForm() {
         <div className="w-16 h-16 rounded-full bg-emerald/10 flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="text-emerald" size={32} />
         </div>
-        <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+        <h3 className="text-xl font-semibold text-white mb-2">{t("successTitle")}</h3>
         <p className="text-gray-400 mb-6">{status.message}</p>
         <Button
           variant="secondary"
           onClick={() => setStatus({ type: "idle" })}
         >
-          Send Another Message
+          {t("sendAnother")}
         </Button>
       </div>
     );
@@ -111,7 +114,7 @@ export function ContactForm() {
         {/* Name */}
         <div>
           <label htmlFor="name" className={labelStyles}>
-            Name *
+            {t("name")} {t("required")}
           </label>
           <input
             type="text"
@@ -120,7 +123,7 @@ export function ContactForm() {
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="Your name"
+            placeholder={t("namePlaceholder")}
             className={inputStyles}
           />
         </div>
@@ -128,7 +131,7 @@ export function ContactForm() {
         {/* Email */}
         <div>
           <label htmlFor="email" className={labelStyles}>
-            Email *
+            {t("email")} {t("required")}
           </label>
           <input
             type="email"
@@ -137,7 +140,7 @@ export function ContactForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            placeholder="your@email.com"
+            placeholder={t("emailPlaceholder")}
             className={inputStyles}
           />
         </div>
@@ -147,7 +150,7 @@ export function ContactForm() {
         {/* Company */}
         <div>
           <label htmlFor="company" className={labelStyles}>
-            Company
+            {t("company")}
           </label>
           <input
             type="text"
@@ -155,7 +158,7 @@ export function ContactForm() {
             name="company"
             value={formData.company}
             onChange={handleChange}
-            placeholder="Your company"
+            placeholder={t("companyPlaceholder")}
             className={inputStyles}
           />
         </div>
@@ -163,7 +166,7 @@ export function ContactForm() {
         {/* Inquiry Type */}
         <div>
           <label htmlFor="inquiryType" className={labelStyles}>
-            Inquiry Type
+            {t("inquiryType")}
           </label>
           <select
             id="inquiryType"
@@ -190,7 +193,7 @@ export function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="message" className={labelStyles}>
-          Message *
+          {t("message")} {t("required")}
         </label>
         <textarea
           id="message"
@@ -199,7 +202,7 @@ export function ContactForm() {
           rows={5}
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell us about your project or what you'd like to discuss..."
+          placeholder={t("messagePlaceholder")}
           className={cn(inputStyles, "resize-none")}
         />
       </div>
@@ -222,18 +225,18 @@ export function ContactForm() {
         {status.type === "loading" ? (
           <>
             <Loader2 className="animate-spin mr-2" size={20} />
-            Sending...
+            {t("sending")}
           </>
         ) : (
           <>
             <Send className="mr-2" size={20} />
-            Send Message
+            {t("send")}
           </>
         )}
       </Button>
 
       <p className="text-center text-gray-500 text-xs">
-        We typically respond within 24 hours. No spam, ever.
+        {t("responseTime")}
       </p>
     </form>
   );

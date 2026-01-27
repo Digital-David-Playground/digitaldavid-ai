@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -41,20 +42,24 @@ import {
   GitBranch,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Factify Pharma Suite | AI for Pharmaceutical Research | Digital David",
-  description:
-    "Factify Pharma Suite - Comprehensive AI platform for pharmaceutical research, regulatory compliance, and clinical trial management.",
-  keywords: [
-    "Pharma AI",
-    "Clinical Trials",
-    "CTD Automation",
-    "Regulatory Compliance",
-    "Drug Development",
-    "GxP Compliance",
-    "Pharmaceutical Research",
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "Factify Pharma Suite | AI for Pharmaceutical Research | Digital David",
+    description:
+      "Factify Pharma Suite - Comprehensive AI platform for pharmaceutical research, regulatory compliance, and clinical trial management.",
+    keywords: [
+      "Pharma AI",
+      "Clinical Trials",
+      "CTD Automation",
+      "Regulatory Compliance",
+      "Drug Development",
+      "GxP Compliance",
+      "Pharmaceutical Research",
+    ],
+    alternates: getAlternates("/products/factify-pharma", locale),
+  };
+}
 
 const stats = [
   { value: "65%", label: "Faster Processing", description: "CTD update time reduction" },

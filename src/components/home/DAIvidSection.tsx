@@ -1,31 +1,34 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/layout/Section";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeInUp } from "@/components/animations/FadeInUp";
 import { MessageSquare, Sparkles, Clock, Globe } from "lucide-react";
 
-const features = [
-  {
-    icon: MessageSquare,
-    label: "Natural Conversations",
-  },
-  {
-    icon: Clock,
-    label: "24/7 Available",
-  },
-  {
-    icon: Globe,
-    label: "Multilingual",
-  },
-  {
-    icon: Sparkles,
-    label: "AI-Powered",
-  },
-];
-
 export function DAIvidSection() {
+  const t = useTranslations("home.daivid");
+
+  const features = [
+    {
+      icon: MessageSquare,
+      label: t("naturalConversations"),
+    },
+    {
+      icon: Clock,
+      label: t("available247"),
+    },
+    {
+      icon: Globe,
+      label: t("multilingual"),
+    },
+    {
+      icon: Sparkles,
+      label: t("aiPowered"),
+    },
+  ];
+
   return (
     <Section variant="dark">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -33,22 +36,20 @@ export function DAIvidSection() {
         <FadeInUp>
           <div>
             <Badge variant="default" className="mb-6">
-              Coming Soon
+              {t("badge")}
             </Badge>
 
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Say Hello to{" "}
-              <span className="gradient-text">DAIvid</span>
+              {t("title")}{" "}
+              <span className="gradient-text">{t("titleHighlight")}</span>
             </h2>
 
             <p className="text-xl text-gray-300 mb-3">
-              Your AI Sales Development Representative
+              {t("role")}
             </p>
 
             <p className="text-gray-400 mb-8 max-w-lg">
-              DAIvid is our AI-powered video avatar - always ready to answer your
-              questions about Digital David, our services, and how we can help
-              transform your business with AI engineering.
+              {t("description")}
             </p>
 
             {/* Feature Pills */}
@@ -65,7 +66,7 @@ export function DAIvidSection() {
             </div>
 
             <p className="text-gray-500 text-sm">
-              Click on the video to start a conversation with DAIvid.
+              {t("clickToChat")}
             </p>
           </div>
         </FadeInUp>
@@ -89,10 +90,10 @@ export function DAIvidSection() {
                     <span className="text-4xl font-bold text-white">D</span>
                   </div>
                   <p className="text-gray-400 text-sm mb-4">
-                    Video avatar embed will appear here
+                    {t("videoPlaceholder")}
                   </p>
                   <p className="text-gray-500 text-xs">
-                    Add your video avatar embed code to replace this placeholder
+                    {t("placeholderHint")}
                   </p>
                 </div>
               </div>
@@ -102,7 +103,7 @@ export function DAIvidSection() {
                 <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
                   <div className="w-3 h-3 bg-emerald rounded-full animate-pulse" />
                   <span className="text-sm text-gray-300">
-                    DAIvid is ready to chat
+                    {t("readyToChat")}
                   </span>
                 </div>
               </div>

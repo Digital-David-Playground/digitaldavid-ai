@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -26,19 +27,23 @@ import {
   Users,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "DocuGuard.ai | GDPR Compliance Automation | Digital David",
-  description:
-    "AI-powered GDPR compliance platform. Automated document classification, data redaction, and compliance management for enterprises.",
-  keywords: [
-    "GDPR Compliance",
-    "Document Classification",
-    "Data Redaction",
-    "AI Compliance",
-    "Data Protection",
-    "Document Management",
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "DocuGuard.ai | GDPR Compliance Automation | Digital David",
+    description:
+      "AI-powered GDPR compliance platform. Automated document classification, data redaction, and compliance management for enterprises.",
+    keywords: [
+      "GDPR Compliance",
+      "Document Classification",
+      "Data Redaction",
+      "AI Compliance",
+      "Data Protection",
+      "Document Management",
+    ],
+    alternates: getAlternates("/products/docuguard", locale),
+  };
+}
 
 const stats = [
   { value: "90%", label: "Effort Reduction", description: "Less manual compliance work" },

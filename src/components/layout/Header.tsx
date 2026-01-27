@@ -1,22 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/engineering", label: "Engineering" },
-  { href: "/services", label: "Services" },
-  { href: "/products", label: "Products" },
-  { href: "/about", label: "About" },
-];
+  { href: "/engineering", labelKey: "engineering" },
+  { href: "/services", labelKey: "services" },
+  { href: "/products", labelKey: "products" },
+  { href: "/about", labelKey: "about" },
+] as const;
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslations("common.nav");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,12 +60,13 @@ export function Header() {
               href={item.href}
               className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
             >
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           ))}
           <Button href="/contact" size="sm">
-            Let&apos;s Talk
+            {t("contact")}
           </Button>
+          <LanguageSwitcher />
         </div>
 
         {/* Mobile Menu Button */}
@@ -86,12 +90,15 @@ export function Header() {
                 className="text-gray-300 hover:text-white transition-colors duration-200 text-lg font-medium py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             ))}
             <Button href="/contact" className="mt-4">
-              Let&apos;s Talk
+              {t("contact")}
             </Button>
+            <div className="mt-2 flex justify-center">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section, SectionHeader } from "@/components/layout/Section";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -10,11 +11,15 @@ import {
 } from "@/components/animations/FadeInUp";
 import { ArrowUpRight, Rocket, Play, Zap, Shield, Award, MessageCircle, Building2, Users } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Products | Digital David",
-  description:
-    "Our AI products: Talenty.ai, Talky, DocuGuard.ai, Factify.ai, Factify Pharma Suite, Factify Finance Suite. Production-ready AI platforms serving customers today.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "products.meta" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: getAlternates("/products", locale),
+  };
+}
 
 const products = [
   {
@@ -156,7 +161,11 @@ const products = [
   },
 ];
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const t = await getTranslations("products");
+  const tCommon = await getTranslations("common.cta");
+  const tHomeCta = await getTranslations("home.cta");
+
   return (
     <>
       {/* Hero */}
@@ -169,13 +178,12 @@ export default function ProductsPage() {
           </FadeInUp>
           <FadeInUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our AI Products
+              {t("hero.title")}
             </h1>
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <p className="text-xl text-gray-400 max-w-2xl">
-              We don&apos;t just consult - we build and ship. These products serve
-              customers today, proving our engineering capability.
+              {t("hero.description")}
             </p>
           </FadeInUp>
         </div>
@@ -199,7 +207,7 @@ export default function ProductsPage() {
                   <div className="w-20 h-20 rounded-full bg-gradient-to-br from-electric-blue to-cyan flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-electric-blue/30">
                     <Play size={32} className="text-white ml-1" />
                   </div>
-                  <p className="text-gray-400 text-sm">See our products in action</p>
+                  <p className="text-gray-400 text-sm">{t("video.seeProducts")}</p>
                 </div>
               </div>
               <div className="absolute inset-0 bg-electric-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -210,13 +218,11 @@ export default function ProductsPage() {
           <FadeInUp delay={0.2}>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                AI That <span className="gradient-text">Delivers Results</span>
+                {t("video.title")} <span className="gradient-text">{t("video.titleHighlight")}</span>
               </h2>
 
               <p className="text-gray-400 mb-8">
-                Every product in our portfolio started as a real business challenge.
-                We built these solutions, deployed them to production, and continue to
-                improve them based on real user feedback. This is AI that works today.
+                {t("video.description")}
               </p>
 
               <div className="space-y-4">
@@ -225,8 +231,8 @@ export default function ProductsPage() {
                     <Zap className="text-electric-blue" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Battle-Tested</h3>
-                    <p className="text-gray-400 text-sm">Production systems serving real customers with real data.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.battleTested")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.battleTestedDesc")}</p>
                   </div>
                 </div>
 
@@ -235,8 +241,8 @@ export default function ProductsPage() {
                     <Shield className="text-purple" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Enterprise Grade</h3>
-                    <p className="text-gray-400 text-sm">Security, compliance, and scalability built from day one.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.enterpriseGrade")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.enterpriseGradeDesc")}</p>
                   </div>
                 </div>
 
@@ -245,8 +251,8 @@ export default function ProductsPage() {
                     <Award className="text-cyan" size={20} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Proven ROI</h3>
-                    <p className="text-gray-400 text-sm">Measurable impact on efficiency, quality, and cost reduction.</p>
+                    <h3 className="font-semibold text-white mb-1">{t("video.provenRoi")}</h3>
+                    <p className="text-gray-400 text-sm">{t("video.provenRoiDesc")}</p>
                   </div>
                 </div>
               </div>
@@ -345,7 +351,7 @@ export default function ProductsPage() {
                         </a>
                       ) : (
                         <Button href={product.href} variant="secondary">
-                          Learn More
+                          {tCommon("learnMore")}
                         </Button>
                       )}
                     </div>
@@ -378,20 +384,18 @@ export default function ProductsPage() {
               </h2>
 
               <p className="text-xl text-gray-300 mb-3">
-                Our Next AI Product: The Career Community
+                {t("comingSoon.subtitle")}
               </p>
 
               <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-                AI-powered career coaching meets community. Where talents find
-                their tribe, companies build authentic connections, and AI
-                guides every step.
+                {t("comingSoon.description")}
               </p>
 
               <Button
                 href="https://talentschmiede-ai.vercel.app/karriererakete"
                 size="lg"
               >
-                Join the Waitlist
+                {tCommon("joinWaitlist")}
               </Button>
             </div>
           </Card>
@@ -409,15 +413,15 @@ export default function ProductsPage() {
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate/50 border border-slate-light/20 rounded-full mb-6">
                 <MessageCircle size={16} className="text-electric-blue" />
-                <span className="text-sm text-gray-300">We build AI, but we talk human to human</span>
+                <span className="text-sm text-gray-300">{tHomeCta("badge")}</span>
               </div>
 
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Ready to Build the <span className="gradient-text">Future</span>?
+                {tHomeCta("title")} <span className="gradient-text">{tHomeCta("titleHighlight")}</span>?
               </h2>
 
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                Behind every AI solution is a conversation. Let&apos;s start yours.
+                {tHomeCta("subtitle")}
               </p>
             </div>
           </FadeInUp>
@@ -440,10 +444,10 @@ export default function ProductsPage() {
                       <Play size={32} className="text-white ml-1" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                      See Our Products in Action
+                      {t("cta.videoTitle")}
                     </h3>
                     <p className="text-gray-400 text-sm md:text-base">
-                      Real AI solving real problems
+                      {t("cta.videoSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -461,12 +465,12 @@ export default function ProductsPage() {
                     <Building2 className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Enterprises</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("enterpriseTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Let&apos;s discuss how our products can transform your operations. Book a 30-minute discovery call.
+                  {t("cta.enterpriseDesc")}
                 </CardDescription>
                 <Button href="/contact" variant="primary" className="w-full">
-                  Book a Discovery Call
+                  {tCommon("bookCall")}
                 </Button>
               </Card>
             </StaggerItem>
@@ -478,9 +482,9 @@ export default function ProductsPage() {
                     <Users className="text-white" size={24} />
                   </div>
                 </div>
-                <CardTitle className="mb-3">For Talents</CardTitle>
+                <CardTitle className="mb-3">{tHomeCta("talentTitle")}</CardTitle>
                 <CardDescription className="flex-grow mb-6">
-                  Join the AI engineering revolution. Explore opportunities with karriererakete.ai.
+                  {tHomeCta("talentDesc")}
                 </CardDescription>
                 <Button href="https://talentschmiede-ai.vercel.app/karriererakete" variant="secondary" className="w-full">
                   karriererakete.ai
@@ -492,7 +496,7 @@ export default function ProductsPage() {
           {/* Bottom tagline */}
           <FadeInUp delay={0.4}>
             <p className="text-center text-gray-500 text-sm mt-12">
-              No chatbots. No forms disappearing into the void. Real conversations with real engineers.
+              {tHomeCta("bottomTagline")}
             </p>
           </FadeInUp>
         </div>

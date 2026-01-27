@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -26,19 +27,23 @@ import {
   Building2,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Factify.ai | AI Foundation Platform | Digital David",
-  description:
-    "Factify.ai - The AI platform powering business transformation. 3 AI Journeys for Customer, Legal, and Market Intelligence workflows.",
-  keywords: [
-    "AI Platform",
-    "Customer Journey",
-    "Legal AI",
-    "Market Intelligence",
-    "Process Automation",
-    "Enterprise AI",
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "Factify.ai | AI Foundation Platform | Digital David",
+    description:
+      "Factify.ai - The AI platform powering business transformation. 3 AI Journeys for Customer, Legal, and Market Intelligence workflows.",
+    keywords: [
+      "AI Platform",
+      "Customer Journey",
+      "Legal AI",
+      "Market Intelligence",
+      "Process Automation",
+      "Enterprise AI",
+    ],
+    alternates: getAlternates("/products/factify", locale),
+  };
+}
 
 const stats = [
   { value: "3", label: "AI Journeys", description: "Industry-specific solutions" },

@@ -1,11 +1,15 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { ParticleBackground } from "@/components/animations/ParticleBackground";
 import { FadeInUp } from "@/components/animations/FadeInUp";
 import { ChevronDown } from "lucide-react";
 
 export function HeroSection() {
+  const t = useTranslations("home.hero");
+  const tc = useTranslations("common.cta");
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -16,32 +20,31 @@ export function HeroSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
         <FadeInUp>
           <p className="text-electric-blue font-mono text-sm md:text-base mb-6 tracking-wider">
-            AI ENGINEERING FOR THE AGENTIC ERA
+            {t("tagline")}
           </p>
         </FadeInUp>
 
         <FadeInUp delay={0.1}>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-            We Engineer
+            {t("title")}
             <br />
-            <span className="gradient-text">The Future.</span>
+            <span className="gradient-text">{t("titleHighlight")}</span>
           </h1>
         </FadeInUp>
 
         <FadeInUp delay={0.2}>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            We architect, build, and deploy AI systems that work.
-            Multi-agent orchestration, LLM engineering, and production-ready AI products.
+            {t("description")}
           </p>
         </FadeInUp>
 
         <FadeInUp delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button href="/engineering" size="lg">
-              Explore Our Work
+              {tc("exploreWork")}
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
-              Book a Call
+              {tc("bookACall")}
             </Button>
           </div>
         </FadeInUp>

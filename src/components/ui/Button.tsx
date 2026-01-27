@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
+import { Link } from "@/i18n/routing";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost";
@@ -32,10 +33,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = cn(baseStyles, variants[variant], sizes[size], className);
 
     if (href) {
+      // External links use plain <a>
+      if (href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+        return (
+          <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        );
+      }
+      // Internal links use locale-aware Link
       return (
-        <a href={href} className={classes}>
+        <Link href={href} className={classes}>
           {children}
-        </a>
+        </Link>
       );
     }
 

@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getAlternates } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -30,22 +31,26 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Factify Finance Suite | AI for Banking, Insurance & Investment | Digital David",
-  description:
-    "Factify Finance Suite - Comprehensive AI platform for banking, insurance, and investment management. Fraud detection, compliance automation, and intelligent decision support.",
-  keywords: [
-    "Finance AI",
-    "Insurance AI",
-    "Banking AI",
-    "Investment AI",
-    "Fraud Detection",
-    "AML Compliance",
-    "Claims Processing",
-    "Risk Assessment",
-    "BaFin Compliance",
-  ],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return {
+    title: "Factify Finance Suite | AI for Banking, Insurance & Investment | Digital David",
+    description:
+      "Factify Finance Suite - Comprehensive AI platform for banking, insurance, and investment management. Fraud detection, compliance automation, and intelligent decision support.",
+    keywords: [
+      "Finance AI",
+      "Insurance AI",
+      "Banking AI",
+      "Investment AI",
+      "Fraud Detection",
+      "AML Compliance",
+      "Claims Processing",
+      "Risk Assessment",
+      "BaFin Compliance",
+    ],
+    alternates: getAlternates("/products/factify-finance", locale),
+  };
+}
 
 const stats = [
   { value: "70%", label: "Faster Claims", description: "Processing time reduction" },
