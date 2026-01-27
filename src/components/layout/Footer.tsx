@@ -101,7 +101,15 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-slate-light/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Digital David AG. All rights reserved.
+            &copy; {new Date().getFullYear()} Digital David AG. All rights reserved. A company of{" "}
+            <a
+              href="https://www.dwg.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Digital Workforce Group AG
+            </a>
           </p>
           <div className="flex gap-6">
             {footerLinks.legal.map((link) => (
