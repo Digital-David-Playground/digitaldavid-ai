@@ -54,7 +54,7 @@ export default function ImpressumPage() {
               <br />
               Registergericht: Amtsgericht Frankfurt am Main
               <br />
-              Registernummer: HRB XXXXX
+              Registernummer: HRB 121238
             </p>
 
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">
@@ -63,7 +63,7 @@ export default function ImpressumPage() {
             <p className="text-gray-400 mb-6">
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
               <br />
-              DE XXXXXXXXX
+              DE337018659
             </p>
 
             <h2 className="text-xl font-semibold text-white mt-8 mb-4">

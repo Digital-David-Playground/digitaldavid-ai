@@ -4,9 +4,13 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowUpRight } from "lucide-react";
 
-const externalProducts = [
-  { href: "https://talenty.ai", label: "Talenty.ai" },
-  { href: "https://docuguard.ai", label: "DocuGuard.ai" },
+const productLinks = [
+  { href: "https://talenty.ai", label: "Talenty.ai", external: true },
+  { href: "https://talky.talenty.ai", label: "Talky.ai", external: true },
+  { href: "/products/docuguard", label: "DocuGuard.ai", external: false },
+  { href: "/products/factify", label: "Factify.ai", external: false },
+  { href: "/products/factify-pharma", label: "Factify Pharma", external: false },
+  { href: "/products/factify-finance", label: "Factify Finance", external: false },
 ];
 
 export function Footer() {
@@ -86,17 +90,26 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">{t("products")}</h4>
             <ul className="space-y-3">
-              {externalProducts.map((link) => (
+              {productLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white text-sm transition-colors inline-flex items-center gap-1"
-                  >
-                    {link.label}
-                    <ArrowUpRight size={12} />
-                  </a>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white text-sm transition-colors inline-flex items-center gap-1"
+                    >
+                      {link.label}
+                      <ArrowUpRight size={12} />
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-gray-400 hover:text-white text-sm transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
