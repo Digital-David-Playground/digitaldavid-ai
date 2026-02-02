@@ -24,7 +24,7 @@ export function VideoAskSection() {
       </FadeInUp>
 
       <FadeInUp delay={0.2}>
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto" style={{ maxWidth: "1200px" }}>
           <iframe
             src="https://www.videoask.com/fi7yx23t1"
             allow="camera *; microphone *; autoplay *; encrypted-media *; fullscreen *; display-capture *;"
@@ -33,8 +33,7 @@ export function VideoAskSection() {
             style={{
               border: "none",
               borderRadius: "24px",
-              minWidth: "100%",
-              maxWidth: "1024px",
+              minWidth: "1024px",
               margin: "0 auto",
               display: "block",
             }}
