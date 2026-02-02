@@ -64,6 +64,12 @@
       "experimenting": "Die meisten Unternehmen experimentieren.",
       "shipping": "Wir liefern."
     },
+    "videoask": {
+      "badge": "Lass uns reden",
+      "title": "Starte ein",
+      "titleHighlight": "Gespräch",
+      "subtitle": "Erzähl uns von deinem Projekt – persönlich, direkt und ohne Umwege."
+    },
     "engineering": {
       "title": "Was wir bauen",
       "subtitle": "Drei Säulen unserer Arbeit. Klar, fokussiert, produktionsbesessen.",

@@ -64,6 +64,12 @@
       "experimenting": "Most companies are experimenting.",
       "shipping": "We're shipping."
     },
+    "videoask": {
+      "badge": "Let's Talk",
+      "title": "Start a",
+      "titleHighlight": "Conversation",
+      "subtitle": "Tell us about your project – personal, direct, no detours."
+    },
     "engineering": {
       "title": "What We Engineer",
       "subtitle": "Three pillars of our work. Clean, focused, production-obsessed.",
