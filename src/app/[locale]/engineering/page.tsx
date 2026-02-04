@@ -270,7 +270,7 @@ export default async function EngineeringPage() {
       </Section>
 
       {/* AI Ecosystem Logos */}
-      <Section variant="dark" className="!py-0">
+      <Section variant="dark" className="!py-12">
         <TechLogos />
       </Section>
 
@@ -278,24 +278,49 @@ export default async function EngineeringPage() {
       <Section variant="dark">
         <SectionHeader title={t("techStack.title")} centered />
 
-        <FadeInUp>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {Object.entries(techStack).map(([category, items]) => (
-              <div key={category}>
-                <h4 className="text-gray-500 uppercase text-sm font-mono mb-4">
-                  {category}
-                </h4>
-                <ul className="space-y-2">
-                  {items.map((item, i) => (
-                    <li key={i} className="text-gray-300">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+        <div className="grid lg:grid-cols-[1fr_280px] gap-12 items-start">
+          {/* Tech Stack Grid */}
+          <FadeInUp>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {Object.entries(techStack).map(([category, items]) => (
+                <div key={category}>
+                  <h4 className="text-gray-500 uppercase text-sm font-mono mb-4">
+                    {category}
+                  </h4>
+                  <ul className="space-y-2">
+                    {items.map((item, i) => (
+                      <li key={i} className="text-gray-300">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </FadeInUp>
+
+          {/* Stats Column */}
+          <FadeInUp delay={0.2}>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-slate/30 border border-slate-light/10">
+                <div className="text-3xl font-bold gradient-text">50+</div>
+                <div className="text-gray-400 text-sm">{t("stats.projects")}</div>
               </div>
-            ))}
-          </div>
-        </FadeInUp>
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-slate/30 border border-slate-light/10">
+                <div className="text-3xl font-bold gradient-text">10M+</div>
+                <div className="text-gray-400 text-sm">{t("stats.apiCalls")}</div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-slate/30 border border-slate-light/10">
+                <div className="text-3xl font-bold gradient-text">99.9%</div>
+                <div className="text-gray-400 text-sm">{t("stats.uptime")}</div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-slate/30 border border-slate-light/10">
+                <div className="text-3xl font-bold gradient-text">24/7</div>
+                <div className="text-gray-400 text-sm">{t("stats.support")}</div>
+              </div>
+            </div>
+          </FadeInUp>
+        </div>
       </Section>
 
       {/* Process */}

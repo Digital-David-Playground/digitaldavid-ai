@@ -364,6 +364,13 @@
       "infra": "Infrastruktur",
       "tools": "Tools"
     },
+    "stats": {
+      "title": "In Zahlen",
+      "projects": "AI-Projekte geliefert",
+      "apiCalls": "API-Aufrufe / Monat",
+      "uptime": "Uptime SLA",
+      "support": "Enterprise Support"
+    },
     "process": {
       "title": "So arbeiten wir",
       "subtitle": "Tage bis zum ersten Ergebnis. Nicht Monate.",

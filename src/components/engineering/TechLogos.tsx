@@ -65,7 +65,7 @@ export function TechLogos() {
   const duplicatedRow2 = [...techPartnersRow2, ...techPartnersRow2];
 
   return (
-    <div className="py-16 overflow-hidden">
+    <div className="py-8 overflow-hidden">
       <FadeInUp>
         <p className="text-center text-gray-500 text-sm uppercase tracking-wider mb-8">
           Building with the AI ecosystem

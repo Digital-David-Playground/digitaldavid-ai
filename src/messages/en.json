@@ -363,6 +363,13 @@
       "infra": "infra",
       "tools": "tools"
     },
+    "stats": {
+      "title": "By the Numbers",
+      "projects": "AI projects delivered",
+      "apiCalls": "API calls / month",
+      "uptime": "Uptime SLA",
+      "support": "Enterprise Support"
+    },
     "process": {
       "title": "How We Work",
       "subtitle": "Days to first value. Not months.",
