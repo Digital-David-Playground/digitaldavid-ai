@@ -24,18 +24,14 @@ export function VideoAskSection() {
       </FadeInUp>
 
       <FadeInUp delay={0.2}>
-        <div className="mx-auto" style={{ maxWidth: "1200px" }}>
+        <div className="mx-auto max-w-[1200px]">
           <iframe
             src="https://www.videoask.com/fi7yx23t1"
             allow="camera *; microphone *; autoplay *; encrypted-media *; fullscreen *; display-capture *;"
             width="100%"
-            height="600"
+            className="h-[500px] md:h-[600px] rounded-2xl"
             style={{
               border: "none",
-              borderRadius: "24px",
-              minWidth: "1024px",
-              margin: "0 auto",
-              display: "block",
             }}
             title="Digital David VideoAsk"
           />
