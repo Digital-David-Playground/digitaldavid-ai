@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
@@ -38,6 +39,8 @@ export function ContactForm() {
   });
 
   const [status, setStatus] = useState<FormStatus>({ type: "idle" });
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -48,13 +51,19 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setStatus({ type: "error", message: t("turnstileRequired") });
+      return;
+    }
+
     setStatus({ type: "loading" });
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       if (!response.ok) {
@@ -72,11 +81,15 @@ export function ContactForm() {
         inquiryType: "discovery",
         message: "",
       });
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     } catch {
       setStatus({
         type: "error",
         message: t("errorMessage"),
       });
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
     }
   };
 
@@ -204,6 +217,17 @@ export function ContactForm() {
           onChange={handleChange}
           placeholder={t("messagePlaceholder")}
           className={cn(inputStyles, "resize-none")}
+        />
+      </div>
+
+      {/* Turnstile */}
+      <div className="flex justify-center">
+        <Turnstile
+          ref={turnstileRef}
+          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+          onSuccess={setTurnstileToken}
+          onExpire={() => setTurnstileToken(null)}
+          options={{ theme: "dark" }}
         />
       </div>
 

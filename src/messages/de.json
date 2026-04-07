@@ -300,6 +300,7 @@
       "successMessage": "Nachricht gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
       "sendAnother": "Weitere Nachricht senden",
       "errorMessage": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "turnstileRequired": "Bitte schließen Sie die Sicherheitsüberprüfung ab.",
       "responseTime": "Wir antworten in der Regel innerhalb von 24 Stunden. Kein Spam, versprochen.",
       "required": "*"
     },

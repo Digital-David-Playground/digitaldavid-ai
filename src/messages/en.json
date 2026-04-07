@@ -299,6 +299,7 @@
       "successMessage": "Message sent! We'll get back to you within 24 hours.",
       "sendAnother": "Send Another Message",
       "errorMessage": "Something went wrong. Please try again or email us directly.",
+      "turnstileRequired": "Please complete the verification check.",
       "responseTime": "We typically respond within 24 hours. No spam, ever.",
       "required": "*"
     },

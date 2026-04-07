@@ -12,6 +12,7 @@ interface ContactFormData {
   company?: string;
   inquiryType: string;
   message: string;
+  turnstileToken: string;
 }
 
 const inquiryTypeLabels: Record<string, string> = {
@@ -39,6 +40,34 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Invalid email format" },
         { status: 400 }
+      );
+    }
+
+    // Verify Turnstile token
+    if (!data.turnstileToken) {
+      return NextResponse.json(
+        { error: "Bot verification required" },
+        { status: 400 }
+      );
+    }
+
+    const turnstileResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          secret: process.env.TURNSTILE_SECRET_KEY,
+          response: data.turnstileToken,
+        }),
+      }
+    );
+
+    const turnstileResult = await turnstileResponse.json();
+    if (!turnstileResult.success) {
+      return NextResponse.json(
+        { error: "Bot verification failed" },
+        { status: 403 }
       );
     }
 
