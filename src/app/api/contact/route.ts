@@ -22,12 +22,87 @@ const inquiryTypeLabels: Record<string, string> = {
   other: "Other",
 };
 
+const MAX_NAME_LENGTH = 120;
+const MAX_EMAIL_LENGTH = 254;
+const MAX_COMPANY_LENGTH = 160;
+const MAX_MESSAGE_LENGTH = 5000;
+const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const rateLimitStore = new Map<string, number[]>();
+
+function normalizeString(value: unknown, maxLength: number) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value.trim().slice(0, maxLength);
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function sanitizeHeaderValue(value: string) {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown";
+  }
+
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function isRateLimited(key: string) {
+  const now = Date.now();
+  const timestamps = rateLimitStore.get(key) ?? [];
+  const recentTimestamps = timestamps.filter(
+    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
+  );
+
+  if (recentTimestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitStore.set(key, recentTimestamps);
+    return true;
+  }
+
+  recentTimestamps.push(now);
+  rateLimitStore.set(key, recentTimestamps);
+  return false;
+}
+
 export async function POST(request: Request) {
   try {
-    const data: ContactFormData = await request.json();
+    const clientIp = getClientIp(request);
+    if (isRateLimited(clientIp)) {
+      return NextResponse.json(
+        { error: "Too many requests" },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(RATE_LIMIT_WINDOW_MS / 1000),
+          },
+        }
+      );
+    }
+
+    const payload = (await request.json()) as Partial<ContactFormData>;
+    const name = normalizeString(payload.name, MAX_NAME_LENGTH);
+    const email = normalizeString(payload.email, MAX_EMAIL_LENGTH).toLowerCase();
+    const company = normalizeString(payload.company, MAX_COMPANY_LENGTH);
+    const message = normalizeString(payload.message, MAX_MESSAGE_LENGTH);
+    const turnstileToken = normalizeString(payload.turnstileToken, 2048);
+    const inquiryType = normalizeString(payload.inquiryType, 32);
 
     // Validate required fields
-    if (!data.name || !data.email || !data.message) {
+    if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -35,8 +110,7 @@ export async function POST(request: Request) {
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Invalid email format" },
         { status: 400 }
@@ -44,7 +118,7 @@ export async function POST(request: Request) {
     }
 
     // Verify Turnstile token
-    if (!data.turnstileToken) {
+    if (!turnstileToken) {
       return NextResponse.json(
         { error: "Bot verification required" },
         { status: 400 }
@@ -58,7 +132,7 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           secret: process.env.TURNSTILE_SECRET_KEY,
-          response: data.turnstileToken,
+          response: turnstileToken,
         }),
       }
     );
@@ -71,7 +145,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const inquiryLabel = inquiryTypeLabels[data.inquiryType] || data.inquiryType;
+    const inquiryLabel = inquiryTypeLabels[inquiryType] || inquiryTypeLabels.other;
 
     // Check if Resend is configured
     if (!resend) {
@@ -87,12 +161,19 @@ export async function POST(request: Request) {
     const fromEmail = process.env.RESEND_FROM_EMAIL || "Digital David <onboarding@resend.dev>";
     // RESEND_TO_EMAIL should be set to the email you verified in Resend, or hello@digitaldavid.io once domain is verified
     const toEmail = process.env.RESEND_TO_EMAIL || "hello@digitaldavid.io";
+    const escapedName = escapeHtml(name);
+    const escapedEmail = escapeHtml(email);
+    const escapedCompany = escapeHtml(company || "Not provided");
+    const escapedInquiryLabel = escapeHtml(inquiryLabel);
+    const escapedMessage = escapeHtml(message);
+    const subjectSafeName = sanitizeHeaderValue(name);
+    const replySubject = encodeURIComponent("Re: Your inquiry to Digital David");
 
     const { error: teamEmailError } = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
-      replyTo: data.email,
-      subject: `New ${inquiryLabel} from ${data.name}`,
+      replyTo: email,
+      subject: `New ${sanitizeHeaderValue(inquiryLabel)} from ${subjectSafeName}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -103,38 +184,38 @@ export async function POST(request: Request) {
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #8b5cf6); padding: 30px; border-radius: 12px 12px 0 0;">
             <h1 style="color: white; margin: 0; font-size: 24px;">New Contact Form Submission</h1>
-            <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">${inquiryLabel}</p>
+            <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">${escapedInquiryLabel}</p>
           </div>
 
           <div style="background: #f8fafc; padding: 30px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">
             <table style="width: 100%; border-collapse: collapse;">
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #64748b; width: 120px;">Name</td>
-                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${data.name}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${escapedName}</td>
               </tr>
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #64748b;">Email</td>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0;">
-                  <a href="mailto:${data.email}" style="color: #0ea5e9; text-decoration: none;">${data.email}</a>
+                  <a href="mailto:${encodeURIComponent(email)}" style="color: #0ea5e9; text-decoration: none;">${escapedEmail}</a>
                 </td>
               </tr>
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #64748b;">Company</td>
-                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${data.company || "Not provided"}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${escapedCompany}</td>
               </tr>
               <tr>
                 <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-weight: 600; color: #64748b;">Type</td>
-                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${inquiryLabel}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; color: #1e293b;">${escapedInquiryLabel}</td>
               </tr>
             </table>
 
             <div style="margin-top: 24px;">
               <h3 style="color: #64748b; font-size: 14px; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">Message</h3>
-              <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; color: #1e293b; white-space: pre-wrap;">${data.message}</div>
+              <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; color: #1e293b; white-space: pre-wrap;">${escapedMessage}</div>
             </div>
 
             <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e2e8f0; text-align: center;">
-              <a href="mailto:${data.email}?subject=Re: Your inquiry to Digital David" style="display: inline-block; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">Reply to ${data.name}</a>
+              <a href="mailto:${encodeURIComponent(email)}?subject=${replySubject}" style="display: inline-block; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">Reply to ${escapedName}</a>
             </div>
           </div>
 
@@ -157,7 +238,7 @@ export async function POST(request: Request) {
     // Send confirmation email to the user
     const { error: userEmailError } = await resend.emails.send({
       from: fromEmail,
-      to: [data.email],
+      to: [email],
       subject: "We received your message - Digital David",
       html: `
         <!DOCTYPE html>
@@ -172,7 +253,7 @@ export async function POST(request: Request) {
           </div>
 
           <div style="background: #f8fafc; padding: 30px; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">
-            <h2 style="color: #1e293b; margin: 0 0 16px 0;">Hi ${data.name},</h2>
+            <h2 style="color: #1e293b; margin: 0 0 16px 0;">Hi ${escapedName},</h2>
 
             <p style="color: #475569; margin: 0 0 16px 0;">
               Thanks for reaching out! We've received your message and will get back to you within 24 hours.
@@ -184,7 +265,7 @@ export async function POST(request: Request) {
 
             <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
               <h3 style="color: #64748b; font-size: 12px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px;">Your message</h3>
-              <p style="color: #1e293b; margin: 0; white-space: pre-wrap;">${data.message}</p>
+              <p style="color: #1e293b; margin: 0; white-space: pre-wrap;">${escapedMessage}</p>
             </div>
 
             <p style="color: #475569; margin: 0;">
