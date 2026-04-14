@@ -19,7 +19,7 @@ export function CTASection() {
       title: t("enterpriseTitle"),
       description: t("enterpriseDesc"),
       cta: tc("bookCall"),
-      href: "/contact",
+      href: "https://dwg.book.kailenty.com/company-digitaldavid",
       primary: true,
     },
     {

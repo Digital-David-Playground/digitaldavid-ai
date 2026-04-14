@@ -43,7 +43,7 @@ export function HeroSection() {
             <Button href="/engineering" size="lg">
               {tc("exploreWork")}
             </Button>
-            <Button href="/contact" variant="secondary" size="lg">
+            <Button href="https://dwg.book.kailenty.com/company-digitaldavid" variant="secondary" size="lg">
               {tc("bookACall")}
             </Button>
           </div>
