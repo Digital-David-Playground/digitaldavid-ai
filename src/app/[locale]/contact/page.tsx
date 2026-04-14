@@ -265,7 +265,7 @@ export default async function ContactPage() {
                 {t("quickActions.enterpriseDesc")}
               </CardDescription>
               <Button
-                href="mailto:hello@digitaldavid.io?subject=Discovery Call Request"
+                href="https://dwg.book.kailenty.com/company-digitaldavid"
                 variant="primary"
                 className="w-full"
               >

@@ -469,7 +469,7 @@ export default async function ProductsPage() {
                 <CardDescription className="flex-grow mb-6">
                   {t("cta.enterpriseDesc")}
                 </CardDescription>
-                <Button href="/contact" variant="primary" className="w-full">
+                <Button href="https://dwg.book.kailenty.com/company-digitaldavid" variant="primary" className="w-full">
                   {tCommon("bookCall")}
                 </Button>
               </Card>
