@@ -63,6 +63,9 @@ export function Header() {
               {t(item.labelKey)}
             </Link>
           ))}
+          <Button href="https://digitaldavid.talenty.ai/" variant="secondary" size="sm">
+            {t("apply")}
+          </Button>
           <Button href="/contact" size="sm">
             {t("contact")}
           </Button>
@@ -93,7 +96,10 @@ export function Header() {
                 {t(item.labelKey)}
               </Link>
             ))}
-            <Button href="/contact" className="mt-4">
+            <Button href="https://digitaldavid.talenty.ai/" variant="secondary" className="mt-4">
+              {t("apply")}
+            </Button>
+            <Button href="/contact" className="mt-2">
               {t("contact")}
             </Button>
             <div className="mt-2 flex justify-center">
