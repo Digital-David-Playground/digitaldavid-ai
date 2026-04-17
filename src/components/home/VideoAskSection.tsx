@@ -28,6 +28,9 @@ export function VideoAskSection() {
           <iframe
             src="https://www.videoask.com/fi7yx23t1"
             allow="camera *; microphone *; autoplay *; encrypted-media *; fullscreen *; display-capture *;"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"
+            referrerPolicy="strict-origin-when-cross-origin"
+            loading="lazy"
             width="100%"
             className="h-[500px] md:h-[600px] rounded-2xl"
             style={{

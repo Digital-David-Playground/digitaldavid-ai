@@ -26,6 +26,8 @@ const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_COMPANY_LENGTH = 160;
 const MAX_MESSAGE_LENGTH = 5000;
+const MAX_REQUEST_BODY_BYTES = 16_384;
+const TURNSTILE_TIMEOUT_MS = 5_000;
 const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -61,6 +63,78 @@ function getClientIp(request: Request) {
   return request.headers.get("x-real-ip")?.trim() || "unknown";
 }
 
+function getAllowedOrigins(request: Request) {
+  const allowedOrigins = new Set<string>([
+    "https://digitaldavid.io",
+    "https://www.digitaldavid.io",
+  ]);
+
+  if (process.env.NODE_ENV !== "production") {
+    allowedOrigins.add("http://localhost:3000");
+    allowedOrigins.add("http://127.0.0.1:3000");
+  }
+
+  const configuredOrigins = process.env.ALLOWED_ORIGINS?.split(",") ?? [];
+  for (const origin of configuredOrigins) {
+    const normalizedOrigin = origin.trim();
+    if (normalizedOrigin) {
+      allowedOrigins.add(normalizedOrigin);
+    }
+  }
+
+  try {
+    allowedOrigins.add(new URL(request.url).origin);
+  } catch {
+    // Ignore malformed request URLs and fall back to the explicit allowlist.
+  }
+
+  return allowedOrigins;
+}
+
+function hasAllowedOrigin(request: Request) {
+  const origin = request.headers.get("origin");
+  if (!origin) {
+    return process.env.NODE_ENV !== "production";
+  }
+
+  return getAllowedOrigins(request).has(origin);
+}
+
+function hasJsonContentType(request: Request) {
+  const contentType = request.headers.get("content-type");
+  return contentType?.split(";")[0]?.trim().toLowerCase() === "application/json";
+}
+
+function hasValidContentLength(request: Request) {
+  const contentLength = request.headers.get("content-length");
+  if (!contentLength) {
+    return true;
+  }
+
+  const bytes = Number(contentLength);
+  return Number.isFinite(bytes) && bytes > 0 && bytes <= MAX_REQUEST_BODY_BYTES;
+}
+
+function getAllowedTurnstileHostnames(request: Request) {
+  const hostnames = new Set<string>(["digitaldavid.io", "www.digitaldavid.io"]);
+  const configuredHostnames = process.env.TURNSTILE_ALLOWED_HOSTNAMES?.split(",") ?? [];
+
+  for (const hostname of configuredHostnames) {
+    const normalizedHostname = hostname.trim();
+    if (normalizedHostname) {
+      hostnames.add(normalizedHostname);
+    }
+  }
+
+  try {
+    hostnames.add(new URL(request.url).hostname);
+  } catch {
+    // Ignore malformed request URLs and fall back to the explicit allowlist.
+  }
+
+  return hostnames;
+}
+
 function isRateLimited(key: string) {
   const now = Date.now();
   const timestamps = rateLimitStore.get(key) ?? [];
@@ -80,6 +154,27 @@ function isRateLimited(key: string) {
 
 export async function POST(request: Request) {
   try {
+    if (!hasAllowedOrigin(request)) {
+      return NextResponse.json(
+        { error: "Invalid origin" },
+        { status: 403 }
+      );
+    }
+
+    if (!hasJsonContentType(request)) {
+      return NextResponse.json(
+        { error: "Unsupported content type" },
+        { status: 415 }
+      );
+    }
+
+    if (!hasValidContentLength(request)) {
+      return NextResponse.json(
+        { error: "Request body too large" },
+        { status: 413 }
+      );
+    }
+
     const clientIp = getClientIp(request);
     if (isRateLimited(clientIp)) {
       return NextResponse.json(
@@ -125,6 +220,14 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!process.env.TURNSTILE_SECRET_KEY) {
+      console.error("Turnstile secret key not configured");
+      return NextResponse.json(
+        { error: "Bot verification unavailable" },
+        { status: 500 }
+      );
+    }
+
     const turnstileResponse = await fetch(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
       {
@@ -133,12 +236,30 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           secret: process.env.TURNSTILE_SECRET_KEY,
           response: turnstileToken,
+          remoteip: clientIp,
         }),
+        signal: AbortSignal.timeout(TURNSTILE_TIMEOUT_MS),
       }
     );
 
-    const turnstileResult = await turnstileResponse.json();
+    const turnstileResult = (await turnstileResponse.json()) as {
+      success?: boolean;
+      hostname?: string;
+      ["error-codes"]?: string[];
+    };
+
     if (!turnstileResult.success) {
+      return NextResponse.json(
+        { error: "Bot verification failed" },
+        { status: 403 }
+      );
+    }
+
+    const allowedHostnames = getAllowedTurnstileHostnames(request);
+    if (!turnstileResult.hostname || !allowedHostnames.has(turnstileResult.hostname)) {
+      console.error("Turnstile hostname mismatch", {
+        hostname: turnstileResult.hostname,
+      });
       return NextResponse.json(
         { error: "Bot verification failed" },
         { status: 403 }
